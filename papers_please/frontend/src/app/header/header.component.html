@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span><button mat-button (click)="goToHome()"><h4>Papers, please! </h4></button></span>
+        <span class="fill-remaining-space"></span>
+        <button mat-button (click)="goToHome()"> Home </button>
+        <button mat-button *ngFor="let link of links" [routerLink]="link.path" routerLinkActive="active">
+        {{ link.label }}
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
