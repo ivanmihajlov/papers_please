@@ -129,6 +129,9 @@ public class DBManager {
 
 		try {
 			col = DatabaseManager.getCollection(conn.uri + collectionId);
+			if (col == null)
+				col = getOrCreateCollection(collectionId);
+			
 			XQueryService xqueryService = (XQueryService) col.getService("XQueryService", "1.0");
 			xqueryService.setProperty("indent", "yes");
 			xqueryService.setNamespace("b", TARGET_NAMESPACE);

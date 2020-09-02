@@ -96,7 +96,7 @@
                 <xs:element name="head">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="recieved_date" minOccurs="1">
+                            <xs:element name="received_date" minOccurs="1">
                                 <xs:complexType>
                                     <xs:simpleContent>
                                         <xs:extension base="xs:date">

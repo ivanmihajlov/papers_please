@@ -220,11 +220,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ScientificPaper.Head.RecievedDate }
+     * Create an instance of {@link ScientificPaper.Head.ReceivedDate }
      * 
      */
-    public ScientificPaper.Head.RecievedDate createScientificPaperHeadRecievedDate() {
-        return new ScientificPaper.Head.RecievedDate();
+    public ScientificPaper.Head.ReceivedDate createScientificPaperHeadRecievedDate() {
+        return new ScientificPaper.Head.ReceivedDate();
     }
 
     /**

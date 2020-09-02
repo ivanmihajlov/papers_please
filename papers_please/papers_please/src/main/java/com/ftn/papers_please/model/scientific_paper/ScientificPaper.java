@@ -44,7 +44,7 @@ import javax.xml.namespace.QName;
  *             &lt;complexContent&gt;
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *                 &lt;sequence&gt;
- *                   &lt;element name="recieved_date"&gt;
+ *                   &lt;element name="received_date"&gt;
  *                     &lt;complexType&gt;
  *                       &lt;simpleContent&gt;
  *                         &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;date"&gt;
@@ -624,7 +624,7 @@ public class ScientificPaper {
      *   &lt;complexContent&gt;
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
      *       &lt;sequence&gt;
-     *         &lt;element name="recieved_date"&gt;
+     *         &lt;element name="received_date"&gt;
      *           &lt;complexType&gt;
      *             &lt;simpleContent&gt;
      *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;date"&gt;
@@ -682,7 +682,7 @@ public class ScientificPaper {
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "recievedDate",
+        "receivedDate",
         "revisedDate",
         "acceptedDate",
         "title",
@@ -691,8 +691,8 @@ public class ScientificPaper {
     })
     public static class Head {
 
-        @XmlElement(name = "recieved_date", required = true)
-        protected ScientificPaper.Head.RecievedDate recievedDate;
+        @XmlElement(name = "received_date", required = true)
+        protected ScientificPaper.Head.ReceivedDate receivedDate;
         @XmlElement(name = "revised_date", required = true)
         protected ScientificPaper.Head.RevisedDate revisedDate;
         @XmlElement(name = "accepted_date", required = true)
@@ -707,27 +707,27 @@ public class ScientificPaper {
         private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
         /**
-         * Gets the value of the recievedDate property.
+         * Gets the value of the receivedDate property.
          * 
          * @return
          *     possible object is
-         *     {@link ScientificPaper.Head.RecievedDate }
+         *     {@link ScientificPaper.Head.ReceivedDate }
          *     
          */
-        public ScientificPaper.Head.RecievedDate getRecievedDate() {
-            return recievedDate;
+        public ScientificPaper.Head.ReceivedDate getReceivedDate() {
+            return receivedDate;
         }
 
         /**
-         * Sets the value of the recievedDate property.
+         * Sets the value of the receivedDate property.
          * 
          * @param value
          *     allowed object is
-         *     {@link ScientificPaper.Head.RecievedDate }
+         *     {@link ScientificPaper.Head.ReceivedDate }
          *     
          */
-        public void setRecievedDate(ScientificPaper.Head.RecievedDate value) {
-            this.recievedDate = value;
+        public void setReceivedDate(ScientificPaper.Head.ReceivedDate value) {
+            this.receivedDate = value;
         }
 
         /**
@@ -1053,7 +1053,7 @@ public class ScientificPaper {
         @XmlType(name = "", propOrder = {
             "value"
         })
-        public static class RecievedDate {
+        public static class ReceivedDate {
 
             @XmlValue
             @XmlJavaTypeAdapter(Adapter1 .class)

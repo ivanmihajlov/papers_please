@@ -31,6 +31,7 @@ export class AllowedRoutes {
 
         if (role.authority === 'ROLE_AUTHOR') {
           // TODO
+          components.push({path: '/add-paper', label: 'Submit paper'});
         }
 
         if (role.authority === 'ROLE_REVIEWER') {

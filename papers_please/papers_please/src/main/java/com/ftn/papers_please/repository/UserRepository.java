@@ -157,14 +157,12 @@ public class UserRepository {
 	 	ByteArrayOutputStream stream = new ByteArrayOutputStream();
 	 	
         marshaller.marshal(user, stream);
-        
         return new String(stream.toByteArray());
 	}	
 	
 	private TUser unmarshallUser(String userXML) throws JAXBException {
 		JAXBContext context = JAXBContext.newInstance(TUser.class);
 		Unmarshaller unmarshaller = context.createUnmarshaller();
-		
 		return (TUser) unmarshaller.unmarshal(new StringReader(userXML));
 	}
 

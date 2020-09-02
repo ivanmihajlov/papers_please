@@ -1,0 +1,17 @@
+<app-header></app-header>
+<form id="add-paper-form" [formGroup]="form">
+    <mat-card id="add-paper-card">
+        <h3>Submit a new paper</h3>
+        <br />
+        <div>
+            <input hidden formControlName="scientificPaper" id="scientificPaper" type="file" name="file"
+                (change)="paperFileChange($event.target.files)" accept=".xml">
+            <button class="margin5" mat-raised-button (click)="openPaperInput()">
+                Choose file...
+            </button>
+            <button class='submit-btn' mat-raised-button color="primary" (click)="submitPaper()">
+                Submit paper
+            </button>
+        </div>
+    </mat-card>
+</form>
