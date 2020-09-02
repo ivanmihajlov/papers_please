@@ -10,6 +10,8 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.exist.xmldb.EXistResource;
+import org.json.JSONObject;
+import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
@@ -21,15 +23,22 @@ import org.xmldb.api.modules.XMLResource;
 
 import com.ftn.papers_please.util.DBManager;
 import com.ftn.papers_please.util.XUpdateTemplate;
+import com.ftn.papers_please.util.FileUtil;
+import com.ftn.papers_please.fuseki.MetadataExtractor;
 import com.ftn.papers_please.exceptions.DatabaseException;
 import com.ftn.papers_please.model.scientific_paper.ScientificPaper;
 import com.ftn.papers_please.exceptions.ResourceNotFoundException;
 
 @Repository
 public class PaperRepository {
+	
+	private static final String XQUERY_PATH = ".\\src\\main\\resources\\xQuery";
 
 	@Autowired
 	private DBManager dbManager;
+	
+	@Autowired
+	private MetadataExtractor metadataExtractor;
 	
 	@Value("${paper-collection-id}")
 	private String paperCollectionId;
@@ -70,6 +79,40 @@ public class PaperRepository {
 		}
 	}
 	
+	public String getById(String id, String loggedAuthor) {
+		String xQueryPath = XQUERY_PATH + "\\findById.txt";
+		String result = "";
+
+		HashMap<String, String> params = new HashMap<>();
+		params.put("id", id);
+		params.put("loggedAuthor", loggedAuthor);
+
+		try {
+			ResourceSet rs = dbManager.executeXQuery(paperCollectionId, "", params, xQueryPath);
+			result = dbManager.resourceSetToString(rs);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public String getAll(String searchText, String loggedAuthor) {
+		String xQueryPath = XQUERY_PATH + "\\textSearch.txt";
+		String result = "";
+
+		HashMap<String, String> params = new HashMap<>();
+		params.put("searchText", searchText);
+		params.put("loggedAuthor", loggedAuthor);
+
+		try {
+			ResourceSet rs = dbManager.executeXQuery(paperCollectionId, "", params, xQueryPath);
+			result = dbManager.resourceSetToString(rs);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	public String getNextId() {
 		String id = "paper0";
 		
@@ -81,6 +124,23 @@ public class PaperRepository {
 			throw new DatabaseException("Generating paper ID failed!");
 		}
 		return id;
+	}
+	
+	public String getMetadataXml(String id) throws Exception {
+		XMLResource paper = findOne(id);
+		if (paper == null)
+			throw new ResourceNotFoundException("Couldn't find paper with id: " + id);
+		
+		// extract the metadata to a file and read it
+		String rdfFilePath = "src/main/resources/rdf/metadata.rdf";
+		metadataExtractor.extractMetadata(paper.getContent().toString(), rdfFilePath);
+		return FileUtil.readFile(rdfFilePath);
+	}
+
+	public String getMetadataJson(String id) throws Exception {
+		String metadataXml = getMetadataXml(id);
+		JSONObject xmlJSONObj = XML.toJSONObject(metadataXml);
+		return xmlJSONObj.toString(4);
 	}
 	
 	public void updateStatus(String paperId, String newStatus) throws Exception {

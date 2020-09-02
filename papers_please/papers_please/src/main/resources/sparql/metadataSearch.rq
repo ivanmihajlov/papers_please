@@ -1,0 +1,29 @@
+PREFIX xml: <https://github.com/ivanmihajlov/papers_please/> 
+PREFIX pred: <https://github.com/ivanmihajlov/papers_please/predicate/> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT ?paper
+FROM <http://localhost:3030/Papers/data/scientificPapers>
+WHERE {
+ ?paper pred:titled ?title .
+ ?paper pred:keyword ?keyword .
+ ?paper pred:isWrittenBy ?author .
+ ?paper pred:accepted ?acceptedDate .
+ ?paper pred:received ?receivedDate .
+ ?author pred:firstName ?first_name .
+ ?author pred:lastName ?last_name .
+ ?author pred:isAMemberOf ?affiliation .
+ ?affiliation pred:affiliationNamed ?affiliation_name .
+ FILTER(CONTAINS(UCASE(str(?title)), UCASE("{{title}}") ) &&
+        CONTAINS(UCASE(str(?keyword)), UCASE("{{keyword}}")) &&
+        (CONTAINS(UCASE(str(?first_name)), UCASE("{{author}}")) ||
+        CONTAINS(UCASE(str(?last_name)), UCASE("{{author}}")) ||
+        CONTAINS(CONCAT(UCASE(str(?first_name)), " ", UCASE(str(?last_name))), UCASE("{{author}}"))) &&
+        CONTAINS(UCASE(str(?affiliation_name)), UCASE("{{affiliation}}")) &&
+        ( (xsd:date(?acceptedDate) >= xsd:date("{{acceptedFromDate}}") || "{{acceptedFromDate}}" = "") &&
+          (xsd:date(?acceptedDate) <= xsd:date("{{acceptedToDate}}") || "{{acceptedToDate}}" = "") )  &&
+        ( (xsd:date(?receivedDate) >= xsd:date("{{receivedFromDate}}") || "{{receivedFromDate}}" = "") &&
+          (xsd:date(?receivedDate) <= xsd:date("{{receivedToDate}}") || "{{receivedToDate}}" = "") ) 
+        ) .
+}
+ORDER BY ?title

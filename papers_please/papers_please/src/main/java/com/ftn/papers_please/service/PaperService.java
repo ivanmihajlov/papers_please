@@ -1,7 +1,11 @@
 package com.ftn.papers_please.service;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,12 +17,17 @@ import org.xmldb.api.modules.XMLResource;
 
 import com.ftn.papers_please.repository.PaperRepository;
 import com.ftn.papers_please.util.DOMParser;
+import com.ftn.papers_please.dto.SearchData;
+import com.ftn.papers_please.fuseki.FusekiReader;
+import com.ftn.papers_please.fuseki.FusekiManager;
+import com.ftn.papers_please.fuseki.MetadataExtractor;
 import com.ftn.papers_please.exceptions.MaxChapterLevelsExceededException;
 import com.ftn.papers_please.model.scientific_paper.ScientificPaper;
 
 @Service
 public class PaperService {
 	
+	private static final String QUERY_FILE_PATH = "src/main/resources/sparql/metadataSearch.rq";
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 	@Value("${paper-schema-path}")
@@ -30,6 +39,12 @@ public class PaperService {
 	@Autowired
 	private PaperRepository paperRepository;
 	
+	@Autowired
+	private MetadataExtractor metadataExtractor;
+
+	@Autowired
+	private FusekiManager fusekiManager;
+	
 	public XMLResource findOne(String id) throws Exception {
 		return paperRepository.findOne(id);
 	}
@@ -38,8 +53,59 @@ public class PaperService {
 		return paperRepository.findOneUnmarshalled(id);
 	}
 	
-	public String save(String scientificPaperXml, String paperVersion) throws Exception {
+	public String getAll(String searchText, String loggedAuthor) {
+		return paperRepository.getAll(searchText, loggedAuthor);
+	}
+	
+	public String getByIds(Set<String> ids, String loggedAuthor) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("<search>");
+		ids.forEach(id -> sb.append(paperRepository.getById(id, loggedAuthor)));
+		sb.append("</search>");
+		return sb.toString();
+	}
+	
+	// get paper IDs from URLs
+	// e.g. https://github.com/ivanmihajlov/papers_please/papers/paper123 -> paper123
+	public Set<String> getIdsFromUrls(Set<String> paperURLs) {
+		Set<String> paperIds = new HashSet<>();
+		for (String url : paperURLs) {
+			String[] idArray = url.split("/");
+			String id = idArray[idArray.length - 1];
+			paperIds.add(id);
+		}
+		return paperIds;
+	}
+	
+	// SPARQL query returns a set matching papers' URLs
+	// XQuery queries then try to find papers with those IDs
+	public String metadataSearch(SearchData searchData, String loggedAuthor) throws IOException {
+		HashMap<String, String> values = new HashMap<>();
+		values.put("keyword", searchData.getKeyword());
+		values.put("title", searchData.getTitle());
+		values.put("author", searchData.getAuthor());
+		values.put("affiliation", searchData.getAffiliation());
 
+		String acceptedFromDate = searchData.getAcceptedFromDate() == null ? ""
+				: sdf.format(searchData.getAcceptedFromDate());
+		String acceptedToDate = searchData.getAcceptedToDate() == null ? ""
+				: sdf.format(searchData.getAcceptedToDate());
+		String receivedFromDate = searchData.getReceivedFromDate() == null ? ""
+				: sdf.format(searchData.getReceivedFromDate());
+		String receivedToDate = searchData.getReceivedToDate() == null ? ""
+				: sdf.format(searchData.getReceivedToDate());
+		
+		values.put("acceptedFromDate", acceptedFromDate);
+		values.put("acceptedToDate", acceptedToDate);
+		values.put("receivedFromDate", receivedFromDate);
+		values.put("receivedToDate", receivedToDate);
+
+		Set<String> paperURLs = FusekiReader.executeQuery(QUERY_FILE_PATH, values);
+		Set<String> paperIds = getIdsFromUrls(paperURLs);
+		return getByIds(paperIds, loggedAuthor);
+	}
+	
+	public String save(String scientificPaperXml, String paperVersion) throws Exception {
 		// validate paper XML using the paper schema
 		Document document = DOMParser.buildDocument(scientificPaperXml, spSchemaPath);
 		String id = paperRepository.getNextId();
@@ -50,18 +116,21 @@ public class PaperService {
 		Element paperElement = (Element) paperNodeList.item(0);
 		paperElement.getAttributes().getNamedItem("id").setNodeValue(id);
 
-		// TODO set metadata attributes
+		generateMetadataAttributes(paperElement, id);
 
 		paperElement.setAttribute("version", paperVersion.toString());
 		paperElement.setAttribute("status", "PENDING");
 
 		String newXml = DOMParser.getStringFromDocument(document);
 		paperRepository.save(newXml, id);
+		
+		String rdfFilePath = "src/main/resources/rdf/newMetadata.rdf";
+		metadataExtractor.extractMetadata(newXml, rdfFilePath);
+		fusekiManager.saveMetadata(rdfFilePath, "/scientificPapers");
 		return id;
 	}
 	
 	public void generateMetadataAttributes(Element paperElement, String id) throws Exception {
-
 		String aboutAttributeValue = "https://github.com/ivanmihajlov/papers_please/scientific_papers/" + id;
 	    paperElement.setAttribute("rdfa:about", aboutAttributeValue);
 		paperElement.setAttribute("rdfa:vocab", "https://github.com/ivanmihajlov/papers_please/predicate/");
@@ -208,6 +277,14 @@ public class PaperService {
 	
 	public void update(ScientificPaper scientificPaper) {
 		paperRepository.update(scientificPaper);
+	}
+	
+	public String getMetadataXml(String id) throws Exception {
+		return paperRepository.getMetadataXml(id);
+	}
+
+	public String getMetadataJson(String id) throws Exception {
+		return paperRepository.getMetadataJson(id);
 	}
 	
 }
