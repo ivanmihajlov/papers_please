@@ -20,6 +20,8 @@ export class PaperCardComponent implements OnInit {
   @Input()
   authorView: boolean;
 
+  papers: Paper[];
+
   constructor(public dialog: MatDialog,
               private paperService: PaperService,
               private utilService: UtilService,
@@ -60,7 +62,15 @@ export class PaperCardComponent implements OnInit {
   }
 
   quotedBy() {
-    this.router.navigate(['/paper-quoted-by/' + this.paper.id]);
+    this.papers = [];
+    this.paperService.getQuotedBy(this.paper.id).subscribe(
+      (response) => {
+        this.papers = this.paperService.responseToArray(response);
+      });
+    if (this.papers.length > 0)
+      this.router.navigate(['/paper-quoted-by/' + this.paper.id]);
+    else
+    this.toastr.info('Info', 'This paper isn\'t quoted');
   }
 
   viewXml() {

@@ -28,12 +28,11 @@ public class FusekiReader {
 		// read SPARQL query from the file
 		String sparqlQueryTemplate = DBManager.readFile(filePath, StandardCharsets.UTF_8);
 		String sparqlQuery = StringSubstitutor.replace(sparqlQueryTemplate, params, "{{", "}}");
-		System.out.println("SPARQL query:\n" + sparqlQuery);
+		System.out.println("\nSPARQL query:\n" + sparqlQuery);
 		
 		// create a QueryExecution which will access the SPARQL service via HTTP
 		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
 		ResultSet results = query.execSelect();
-		ResultSetFormatter.outputAsXML(System.out, results);
 		Set<String> papers = new HashSet<>(); // set of paper URLs, e.g. https://github.com/ivanmihajlov/papers_please/papers/paper123
 		String varName;
 		RDFNode varValue;
@@ -48,6 +47,9 @@ public class FusekiReader {
 		    		papers.add(varValue.toString());
 		    }
 		}
+		
+		System.out.println("\nSPARQL query result:");
+		ResultSetFormatter.outputAsXML(System.out, results);
 		
 		query.close();
 		return papers;
