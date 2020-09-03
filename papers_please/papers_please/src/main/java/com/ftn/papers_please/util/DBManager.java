@@ -137,7 +137,7 @@ public class DBManager {
 			if (xqueryExpression.isEmpty())
 				xqueryExpression = readFile(xqueryFilePath, StandardCharsets.UTF_8);
 			
-			for(String param : parameterMap.keySet())
+			for (String param : parameterMap.keySet())
                 xqueryService.declareVariable(param, parameterMap.get(param));
 			
 			CompiledExpression compiledXquery = xqueryService.compile(xqueryExpression);

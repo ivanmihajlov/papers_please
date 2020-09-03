@@ -12,7 +12,6 @@ import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
-import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.RDFNode;
 
 import com.ftn.papers_please.fuseki.FusekiAuthenticationUtilities.FusekiConnectionProperties;
@@ -47,9 +46,6 @@ public class FusekiReader {
 		    		papers.add(varValue.toString());
 		    }
 		}
-		
-		System.out.println("\nSPARQL query result:");
-		ResultSetFormatter.outputAsXML(System.out, results);
 		
 		query.close();
 		return papers;

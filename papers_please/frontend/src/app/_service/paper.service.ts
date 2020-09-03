@@ -67,7 +67,7 @@ export class PaperService {
       if (!Array.isArray(papers))
         papers = [papers];
 
-      for ( const paper of papers ) {
+      for (const paper of papers) {
         const authorsList = [];
         for (const author of paper.author) {
           authorsList.push(author._text);
