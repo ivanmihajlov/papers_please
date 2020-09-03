@@ -24,11 +24,11 @@
                     <b>Date published:</b> {{ paper.acceptedDate }}
                 </td>
             </tr>
-            <tr>
-                    <td>
-                        <b>Status:</b> {{ paper.paperStatus }}
-                    </td>
-                </tr>
+            <tr *ngIf="router.url !== '/'">
+                <td>
+                    <b>Status:</b> {{ paper.paperStatus }}
+                </td>
+            </tr>
         </table>
         
         <div id="btns-div" align="right">

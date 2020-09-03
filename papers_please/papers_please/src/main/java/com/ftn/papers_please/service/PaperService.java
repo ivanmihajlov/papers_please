@@ -19,6 +19,8 @@ import org.xmldb.api.modules.XMLResource;
 import com.ftn.papers_please.repository.PaperRepository;
 import com.ftn.papers_please.util.DOMParser;
 import com.ftn.papers_please.util.XSLFOTransformer;
+import com.ftn.papers_please.exceptions.ProcessStatusException;
+import com.ftn.papers_please.exceptions.RevisionForbiddenException;
 import com.ftn.papers_please.dto.SearchData;
 import com.ftn.papers_please.fuseki.FusekiReader;
 import com.ftn.papers_please.fuseki.FusekiManager;
@@ -41,6 +43,9 @@ public class PaperService {
 	
 	@Autowired
 	private PaperRepository paperRepository;
+
+	@Autowired
+	private PublishingProcessService publishingProcessService;
 	
 	@Autowired
 	private MetadataExtractor metadataExtractor;
@@ -161,6 +166,24 @@ public class PaperService {
 		metadataExtractor.extractMetadata(newXml, rdfFilePath);
 		fusekiManager.saveMetadata(rdfFilePath, "/scientificPapers");
 		return id;
+	}
+	
+	public void withdrawScientificPaper(String paperId, String authorUsername) throws Exception {
+		String processId = publishingProcessService.findOneByPaperId(paperId);
+		String status = publishingProcessService.getProcessStatus(processId);
+		String authorFromProcess = publishingProcessService.getAuthorFromProcess(processId);
+		
+		if (!authorFromProcess.equals(authorUsername))
+			throw new RevisionForbiddenException("You are not the author of this paper!");
+
+		if (status.equalsIgnoreCase("WITHDRAWN"))
+			throw new ProcessStatusException("Paper already withrawn!");
+
+		if (status.equalsIgnoreCase("ACCEPTED") || status.equalsIgnoreCase("REJECTED") || status.equalsIgnoreCase("WITHDRAWN"))
+			throw new ProcessStatusException("Withdrawing not possible!");
+
+		publishingProcessService.updateStatus(processId, "WITHDRAWN");
+		paperRepository.updateStatus(paperId, "WITHDRAWN");
 	}
 	
 	public void generateMetadataAttributes(Element paperElement, String id) throws Exception {

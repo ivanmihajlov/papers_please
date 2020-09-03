@@ -23,6 +23,7 @@ import org.xmldb.api.modules.XMLResource;
 
 import com.ftn.papers_please.util.DBManager;
 import com.ftn.papers_please.util.XUpdateTemplate;
+import com.ftn.papers_please.util.FileUtil;
 import com.ftn.papers_please.exceptions.CustomUnexpectedException;
 import com.ftn.papers_please.exceptions.DatabaseException;
 import com.ftn.papers_please.exceptions.ResourceNotFoundException;
@@ -71,6 +72,17 @@ public class PublishingProcessRepository {
 		if (result == null)
 			throw new ResourceNotFoundException("Couldn't find the publishing process with id " + id);
 		return result;
+	}
+	
+	public String findOneByPaperId(String paperId) throws Exception {
+		String xQueryPath = "./src/main/resources/xQuery/getProcessByPaperId.txt";
+		HashMap<String, String> params = new HashMap<>();
+		params.put("id", paperId);
+		ResourceSet result = dbManager.executeXQuery(publishingProcessCollectionId, "", params, xQueryPath);
+		if (result.getSize() == 0)
+			throw new ResourceNotFoundException("No publishing process for paper with ID: " + paperId);
+		String processId = result.getIterator().nextResource().getContent().toString();
+		return processId;
 	}
 
 	public PublishingProcess findOneUnmarshalled(String id) {
@@ -132,6 +144,24 @@ public class PublishingProcessRepository {
 		} catch (Exception e) {
 			throw new CustomUnexpectedException("Error occurred while assigning editor " + userId + " to publishing process " + processId);
 		}
+	}
+	
+	public String getAuthorFromProcess(String processId) throws Exception {
+		String xQueryPath = "./src/main/resources/xQuery/getAuthorFromProcess.txt";
+		HashMap<String, String> params = new HashMap<>();
+		params.put("id", processId);
+		ResourceSet rs = dbManager.executeXQuery(publishingProcessCollectionId, "", params, xQueryPath);
+		String author = rs.getIterator().nextResource().getContent().toString();
+		return author;
+	}
+	
+	public String getProcessStatus(String processId) throws Exception {
+		String query = FileUtil.readFile("./src/main/resources/xQuery/getProcessStatus.txt");
+		HashMap<String, String> params = new HashMap<>();
+		params.put("id", processId);
+		ResourceSet rs = dbManager.executeXQuery(publishingProcessCollectionId, query, params, "");
+		String status = rs.getIterator().nextResource().getContent().toString();
+		return status;
 	}
 	
 	public void save(String publishingProcessXml, String id) throws Exception {

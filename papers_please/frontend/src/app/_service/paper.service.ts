@@ -54,6 +54,10 @@ export class PaperService {
     return this.http.get(URL + '/metadata/json/' + paperId, { responseType: 'text' });
   }
 
+  withdrawPaper(paperId: string) {
+    return this.http.delete(URL + '/' + paperId, this.httpOptions);
+  }
+
   responseToArray(response: any): Paper[] {
     const returnPapers: Paper[] = [];
     if (response != null) {

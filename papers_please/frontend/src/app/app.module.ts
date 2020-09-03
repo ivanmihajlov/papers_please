@@ -21,6 +21,7 @@ import { PaperCardComponent } from './paper-card/paper-card.component';
 import { AuthorPapersComponent } from './author-papers/author-papers.component';
 import { QuotedPapersComponent } from './quoted-papers/quoted-papers.component';
 import { SearchFormComponent } from './search-form/search-form.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { SearchFormComponent } from './search-form/search-form.component';
     PaperCardComponent,
     AuthorPapersComponent,
     QuotedPapersComponent,
-    SearchFormComponent
+    SearchFormComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -46,22 +48,24 @@ import { SearchFormComponent } from './search-form/search-form.component';
     HttpClientModule,
     ToastrModule.forRoot({
       progressBar: true,
-      timeOut: 4000,
+      timeOut: 2000,
       closeButton: true,
       positionClass: 'toast-bottom-right',
-      preventDuplicates: true
+      preventDuplicates: false
     })
   ],
   providers: [
     AllowedRoutes,
     AuthenticationService,
     PaperService,
+    AuthorPapersComponent,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
     }
   ],
+  entryComponents: [ConfirmationDialogComponent],
   bootstrap: [AppComponent]
 })
 

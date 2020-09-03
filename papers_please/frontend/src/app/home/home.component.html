@@ -1,5 +1,10 @@
-<app-header></app-header>
-<app-search-form (sendSearchParams)= "sendSearchParams($event)"></app-search-form>
+<app-header (sendSearchData)="sendSearchData($event)"></app-header>
+<app-search-form (sendSearchParams)="sendSearchParams($event)"></app-search-form>
+
+<div>
+    <h1 id='label'>Published papers</h1>
+</div>
+
 <div id="paper-cards">
     <app-paper-card *ngFor="let paper of papers" [paper]="paper" [authorView]="false"></app-paper-card>
 </div> 

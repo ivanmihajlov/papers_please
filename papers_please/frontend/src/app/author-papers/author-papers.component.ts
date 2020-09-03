@@ -31,7 +31,7 @@ export class AuthorPapersComponent implements OnInit {
   }
 
   sendSearchData(searchText: string) {
-    this.getPapers('?searchText=' + searchText + '&loggedAuthor=' + this.utilService.getLoggedUser() );
+    this.getPapers('?searchText=' + searchText + '&loggedAuthor=' + this.utilService.getLoggedUser());
   }
 
   sendSearchParams(params: string) {

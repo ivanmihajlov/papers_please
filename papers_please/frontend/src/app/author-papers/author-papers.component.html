@@ -1,6 +1,10 @@
 <app-header (sendSearchData)="sendSearchData($event)"></app-header>
 <app-search-form (sendSearchParams)="sendSearchParams($event)"></app-search-form>
 
+<div>
+    <h1 id='label'>My papers</h1>
+</div>
+
 <div id='div-buttons'>
     <button mat-raised-button color="primary" (click)="filterByStatus('ALL')">ALL</button>
     <button mat-raised-button color="primary" (click)="filterByStatus('PENDING')">PENDING</button>

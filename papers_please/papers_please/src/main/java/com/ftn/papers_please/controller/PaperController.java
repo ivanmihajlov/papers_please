@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -100,6 +101,14 @@ public class PaperController {
 		String paperId = paperService.save(scientificPaperXml, "1"); // 1 is the paper version
 		String processId = publishingProcessService.createProcess(paperId, username);
 		return new ResponseEntity<>(processId, HttpStatus.CREATED);
+	}
+	
+	@PreAuthorize("hasRole('ROLE_AUTHOR')")
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<String> withdrawScientificPaper(@PathVariable("id") String paperId) throws Exception {
+		String username = tokenUtils.getUsernameFromRequest(request);
+		paperService.withdrawScientificPaper(paperId, username);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/{id}/quotes", produces = MediaType.APPLICATION_XML_VALUE)

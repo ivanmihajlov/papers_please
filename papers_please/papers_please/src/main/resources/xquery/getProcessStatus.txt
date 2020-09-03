@@ -1,0 +1,6 @@
+declare namespace sp="https://github.com/ivanmihajlov/papers_please";
+let $collection := collection("/db/sample/publishing_process")
+
+for $pp in $collection
+where $pp/sp:publishing-process/@id = $id
+return data($pp/sp:publishing-process/@status)

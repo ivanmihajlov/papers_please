@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Paper } from '../_model/paper.model';
 import { PaperService } from '../_service/paper.service';
 import { UtilService } from '../_service/util.service';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { AuthorPapersComponent } from '../author-papers/author-papers.component';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
@@ -25,10 +27,38 @@ export class PaperCardComponent implements OnInit {
   constructor(public dialog: MatDialog,
               private paperService: PaperService,
               private utilService: UtilService,
+              private authorPapersComponent: AuthorPapersComponent,
               private toastr: ToastrService,
               private router: Router) { }
 
   ngOnInit() {
+  }
+
+  confirmWithdraw(title: string, paperId: string) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: 'Withdraw paper \"' + title + '\"?'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if ( result === true ) {
+        this.withdrawPaper(paperId);
+       }
+    });
+  }
+
+  withdrawPaper(paperId: string) {
+    this.paperService.withdrawPaper(paperId).subscribe(
+      (response => {
+        this.toastr.success('Success', 'Paper withdrawn');
+        this.authorPapersComponent.ngOnInit();
+      }), (error => {
+          if (error.error.exception) {
+            this.toastr.error('Error', error.error.exception);
+          } else {
+            this.toastr.error('Error', 'Unknown error');
+            console.log(JSON.stringify(error));
+          }
+      })
+    );
   }
 
   metadataRdf() {

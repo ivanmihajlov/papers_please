@@ -42,6 +42,10 @@ public class PublishingProcessService {
 	public XMLResource findOne(String id) throws Exception {
 		return publishingProcessRepository.findOne(id);
 	}
+	
+	public String findOneByPaperId(String paperId) throws Exception {
+		return publishingProcessRepository.findOneByPaperId(paperId);
+	}
 
 	public PublishingProcess findOneUnmarshalled(String id)  {
 		return publishingProcessRepository.findOneUnmarshalled(id);
@@ -73,6 +77,10 @@ public class PublishingProcessService {
 		return id;
 	}
 	
+	public String getAuthorFromProcess(String processId) throws Exception {
+		return publishingProcessRepository.getAuthorFromProcess(processId);
+	}
+	
 	public void updateStatus(String processId, String status) {
 		try {
 			PublishingProcess publishingProcess = publishingProcessRepository.findOneUnmarshalled(processId);
@@ -84,6 +92,10 @@ public class PublishingProcessService {
 			throw new CustomUnexpectedException("Error while updating publishing process status!");
 		}
     }
+	
+	public String getProcessStatus(String processId) throws Exception {
+		return publishingProcessRepository.getProcessStatus(processId);
+	}
 	
 	public void assignEditor(String processId, String userId) throws Exception {
 		publishingProcessRepository.assignEditor(processId, userId);
