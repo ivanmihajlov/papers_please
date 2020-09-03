@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PaperService } from '../_service/paper.service';
+import { Paper } from '../_model/Paper.model';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  papers: Paper[] = [];
+  allPapers: Paper[] = [];
 
-  ngOnInit(): void {
+  constructor(private paperService: PaperService) { }
+
+  ngOnInit() {
+    this.getPapers('');
+  }
+
+  getPapers(params: string) {
+    this.papers = [];
+
+    this.paperService.getScientificPapers(params).subscribe(
+      (response) => {
+        this.papers = this.paperService.responseToArray(response);
+        this.allPapers = this.papers;
+      });
+  }
+
+  sendSearchData(searchText: string) {
+    this.getPapers('?searchText=' + searchText);
+  }
+
+  sendSearchParams(searchText: string) {
+    this.getPapers('?' + searchText);
   }
 
 }

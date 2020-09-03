@@ -1,5 +1,7 @@
 <app-header></app-header>
-<app-search-form (sendSearchParams)= "sendSearchParams($event)"></app-search-form>
-<div id="paper-cards">
+<div class="paper-cards" *ngIf="papers.length == 0">
+    <h3>No quotes</h3>
+</div>
+<div class="paper-cards">
     <app-paper-card *ngFor="let paper of papers" [paper]="paper" [authorView]="false"></app-paper-card>
 </div> 

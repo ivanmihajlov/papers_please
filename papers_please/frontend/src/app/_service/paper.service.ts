@@ -22,8 +22,36 @@ export class PaperService {
     })
   };
 
+  getScientificPapers(params: string): Observable<string> {
+    return this.http.get(URL + params, { responseType: 'text' });
+  }
+
   addScientificPaper(paperXml: string) {
     return this.http.post(URL, paperXml, this.httpOptions);
+  }
+
+  getQuotedBy(paperId: string): Observable<string> {
+    return this.http.get(URL + '/' + paperId + '/quotes', { responseType: 'text' });
+  }
+
+  getXml(paperId: string) {
+    window.open(URL + '/xml/' + paperId, '_blank');
+  }
+
+  getPdf(paperId: string) {
+    window.open(URL + '/pdf/' + paperId, '_blank');
+  }
+
+  getHtml(paperId: string) {
+    window.open(URL + '/html/' + paperId, '_blank');
+  }
+
+  getMetadataRdf(paperId: string): Observable<string> {
+    return this.http.get(URL + '/metadata/xml/' + paperId, { responseType: 'text' });
+  }
+
+  getMetadataJson(paperId: string): Observable<string> {
+    return this.http.get(URL + '/metadata/json/' + paperId, { responseType: 'text' });
   }
 
   responseToArray(response: any): Paper[] {
@@ -55,12 +83,11 @@ export class PaperService {
             processId: paper.process_id._text,
             paperStatus: paper.paper_status._text,
             title : paper.title._text,
-            recievedDate: paper.recieved_date._text,
+            receivedDate: paper.received_date._text,
             acceptedDate : paper.accepted_date._text,
             authors : authorsList,
             keywords: keywordsList
         };
-
         returnPapers.push(scientificPaper);
       }
     }

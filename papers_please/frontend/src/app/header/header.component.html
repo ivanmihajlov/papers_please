@@ -1,10 +1,17 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
         <span><button mat-button (click)="goToHome()"><h4>Papers, please! </h4></button></span>
+        <div>
+            <form id="general-search-form" noval [formGroup]="generalSearchForm">
+                &nbsp;
+                <i id="search-icon-btn" class="fa fa-search" aria-hidden="true" (click)="generalSearch()"></i>
+                <input matInput formControlName="searchData" type="text" id="search-input" placeholder="Search (case sensitive)..." (keyup.enter)="generalSearch()">
+            </form>
+        </div>
         <span class="fill-remaining-space"></span>
         <button mat-button (click)="goToHome()"> Home </button>
         <button mat-button *ngFor="let link of links" [routerLink]="link.path" routerLinkActive="active">
-        {{ link.label }}
+            {{ link.label }}
         </button>
     </mat-toolbar-row>
 </mat-toolbar>

@@ -1,6 +1,6 @@
 <rdf:RDF xmlns:rdfa="http://www.w3.org/ns/rdfa#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
   <rdf:Description rdf:about="https://github.com/ivanmihajlov/papers_please/scientific_papers/paper2">
-    <pred:received xmlns:pred="https://github.com/ivanmihajlov/papers_please/predicate/" rdf:datatype="date">2020-09-02</pred:received>
+    <pred:received xmlns:pred="https://github.com/ivanmihajlov/papers_please/predicate/" rdf:datatype="date">2020-09-03</pred:received>
   </rdf:Description>
   <rdf:Description rdf:about="https://github.com/ivanmihajlov/papers_please/scientific_papers/paper2">
     <pred:revised xmlns:pred="https://github.com/ivanmihajlov/papers_please/predicate/" rdf:datatype="date"/>
@@ -9,10 +9,10 @@
     <pred:accepted xmlns:pred="https://github.com/ivanmihajlov/papers_please/predicate/" rdf:datatype="date"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://github.com/ivanmihajlov/papers_please/scientific_papers/paper2">
-    <pred:title xmlns:pred="https://github.com/ivanmihajlov/papers_please/predicate/" rdf:datatype="string">Interstellar</pred:title>
+    <pred:titled xmlns:pred="https://github.com/ivanmihajlov/papers_please/predicate/" rdf:datatype="string">Contact</pred:titled>
   </rdf:Description>
   <rdf:Description rdf:about="https://github.com/ivanmihajlov/papers_please/scientific_papers/paper2">
-    <pred:title xmlns:pred="https://github.com/ivanmihajlov/papers_please/predicate/" rdf:datatype="string">title1</pred:title>
+    <pred:titled xmlns:pred="https://github.com/ivanmihajlov/papers_please/predicate/" rdf:datatype="string">title1</pred:titled>
   </rdf:Description>
   <rdf:Description rdf:about="author0">
     <pred:isTheAuthorOf xmlns:pred="https://github.com/ivanmihajlov/papers_please/predicate/" rdf:resource="https://github.com/ivanmihajlov/papers_please/scientific_papers/paper2"/>
@@ -65,16 +65,10 @@
   <rdf:Description rdf:about="https://github.com/ivanmihajlov/papers_please/scientific_papers/paper2">
     <pred:keyword xmlns:pred="https://github.com/ivanmihajlov/papers_please/predicate/" rdf:datatype="string">universe</pred:keyword>
   </rdf:Description>
-  <rdf:Description rdf:about="https://github.com/ivanmihajlov/papers_please/scientific_papers/paper1">
+  <rdf:Description rdf:about="https://github.com/ivanmihajlov/papers_please/scientific_papers/paper0">
     <pred:isQuotedBy xmlns:pred="https://github.com/ivanmihajlov/papers_please/predicate/" rdf:resource="https://github.com/ivanmihajlov/papers_please/scientific_papers/paper2"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://github.com/ivanmihajlov/papers_please/scientific_papers/paper2">
-    <pred:quotes xmlns:pred="https://github.com/ivanmihajlov/papers_please/predicate/" rdf:resource="https://github.com/ivanmihajlov/papers_please/scientific_papers/paper1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://github.com/ivanmihajlov/papers_please/scientific_papers/paper2">
-    <pred:title xmlns:pred="https://github.com/ivanmihajlov/papers_please/predicate/" rdf:datatype="string">title0</pred:title>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://github.com/ivanmihajlov/papers_please/scientific_papers/paper2">
-    <pred:title xmlns:pred="https://github.com/ivanmihajlov/papers_please/predicate/" rdf:datatype="string">New worlds</pred:title>
+    <pred:quotes xmlns:pred="https://github.com/ivanmihajlov/papers_please/predicate/" rdf:resource="https://github.com/ivanmihajlov/papers_please/scientific_papers/paper0"/>
   </rdf:Description>
 </rdf:RDF>

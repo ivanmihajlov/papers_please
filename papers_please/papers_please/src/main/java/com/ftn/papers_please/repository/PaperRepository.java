@@ -32,7 +32,9 @@ import com.ftn.papers_please.exceptions.ResourceNotFoundException;
 @Repository
 public class PaperRepository {
 	
-	private static final String XQUERY_PATH = ".\\src\\main\\resources\\xQuery";
+	private static final String XQUERY_PATH = "src/main/resources/xQuery";
+	public static final String PAPER_XSL_FO_PATH = "src/main/resources/xsl-fo/paper_fo.xsl";
+	public static final String PAPER_XSL_PATH = "src/main/resources/xslt/paper.xsl";
 
 	@Autowired
 	private DBManager dbManager;

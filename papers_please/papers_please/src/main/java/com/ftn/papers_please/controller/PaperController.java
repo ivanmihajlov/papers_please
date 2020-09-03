@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -47,6 +48,28 @@ public class PaperController {
 		return new ResponseEntity<>(resource.getContent().toString(), HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/xml/{id}", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<String> findOneXml(@PathVariable("id") String id) throws Exception {
+		XMLResource resource = paperService.findOneXml(id);
+		return new ResponseEntity<>(resource.getContent().toString(), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/html/{id}", produces = MediaType.TEXT_HTML_VALUE)
+	public ResponseEntity<String> findOneHtml(@PathVariable("id") String id) throws Exception {
+		byte[] resource = paperService.findOneHtml(id);
+		return new ResponseEntity<>(new String(resource), HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/pdf/{id}", produces = MediaType.APPLICATION_PDF_VALUE)
+	public ResponseEntity<byte[]> findOnePdf(@PathVariable("id") String id) throws Exception {
+		byte[] contents = paperService.findOnePdf(id);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_PDF);
+		headers.add("Content-Disposition", "inline; filename=" + id + ".pdf");
+		ResponseEntity<byte[]> response = new ResponseEntity<>(contents, headers, HttpStatus.OK);
+		return response;
+	}
+	
 	@GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
 	public ResponseEntity<String> findAll(@RequestParam(defaultValue = "") String searchText,
 			@RequestParam(defaultValue = "") String title, @RequestParam(defaultValue = "") String author,
@@ -57,11 +80,6 @@ public class PaperController {
 	) throws IOException {
 		if (!loggedAuthor.equals(""))
 			loggedAuthor = tokenUtils.getUsernameFromRequest(request);
-
-		System.out.println("Title: " + title + " Author: " + author + " Affiliation: " + affiliation + " Keyword: "
-				+ keyword + "Accepted From Date: " + acceptedFromDate + "Accepted To Date: " + acceptedToDate
-				+ "Recieved from: " + receivedFromDate + "Recieved to: " + receivedToDate + " Logged author: "
-				+ loggedAuthor);
 		
 		String retVal = "";
 		if (title.equals("") && author.equals("") && affiliation.equals("") && keyword.equals("")
@@ -82,6 +100,11 @@ public class PaperController {
 		String paperId = paperService.save(scientificPaperXml, "1"); // 1 is the paper version
 		String processId = publishingProcessService.createProcess(paperId, username);
 		return new ResponseEntity<>(processId, HttpStatus.CREATED);
+	}
+	
+	@GetMapping(value = "/{id}/quotes", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<String> getQuotedBy(@PathVariable("id") String paperId) throws Exception {
+		return new ResponseEntity<>(paperService.getQuotedBy(paperId), HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/metadata/xml/{id}", produces = MediaType.APPLICATION_XML_VALUE)

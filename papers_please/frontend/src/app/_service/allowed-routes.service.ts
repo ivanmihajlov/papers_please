@@ -30,8 +30,8 @@ export class AllowedRoutes {
         }
 
         if (role.authority === 'ROLE_AUTHOR') {
-          // TODO
           components.push({path: '/add-paper', label: 'Submit paper'});
+          components.push({path: '/my-papers', label: 'My papers'});
         }
 
         if (role.authority === 'ROLE_REVIEWER') {

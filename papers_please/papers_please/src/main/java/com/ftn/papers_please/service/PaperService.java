@@ -1,5 +1,6 @@
 package com.ftn.papers_please.service;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,6 +18,7 @@ import org.xmldb.api.modules.XMLResource;
 
 import com.ftn.papers_please.repository.PaperRepository;
 import com.ftn.papers_please.util.DOMParser;
+import com.ftn.papers_please.util.XSLFOTransformer;
 import com.ftn.papers_please.dto.SearchData;
 import com.ftn.papers_please.fuseki.FusekiReader;
 import com.ftn.papers_please.fuseki.FusekiManager;
@@ -28,6 +30,7 @@ import com.ftn.papers_please.model.scientific_paper.ScientificPaper;
 public class PaperService {
 	
 	private static final String QUERY_FILE_PATH = "src/main/resources/sparql/metadataSearch.rq";
+	private static final String QUOTES_FILE_PATH = "src/main/resources/sparql/findQuotes.rq";
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 	@Value("${paper-schema-path}")
@@ -45,12 +48,34 @@ public class PaperService {
 	@Autowired
 	private FusekiManager fusekiManager;
 	
+	@Autowired
+	private XSLFOTransformer xslfoTransformer;
+	
 	public XMLResource findOne(String id) throws Exception {
 		return paperRepository.findOne(id);
 	}
 
 	public ScientificPaper findOneUnmarshalled(String id) {
 		return paperRepository.findOneUnmarshalled(id);
+	}
+	
+	public XMLResource findOneXml(String id) throws Exception {
+		XMLResource paperXml = paperRepository.findOne(id);
+		return paperXml;
+	}
+	
+	public byte[] findOnePdf(String id) throws Exception {
+		String xmlString = paperRepository.findOne(id).getContent().toString();
+		String xslString = PaperRepository.PAPER_XSL_FO_PATH;
+		ByteArrayOutputStream paperPdf = xslfoTransformer.generatePDF(xmlString, xslString); 
+		return paperPdf.toByteArray();
+    }
+    
+    public byte[] findOneHtml(String id) throws Exception {
+    	String xmlString = paperRepository.findOne(id).getContent().toString();
+    	String xslString = PaperRepository.PAPER_XSL_PATH;
+    	ByteArrayOutputStream paperHtml = xslfoTransformer.generateHTML(xmlString, xslString); 
+		return paperHtml.toByteArray();
 	}
 	
 	public String getAll(String searchText, String loggedAuthor) {
@@ -105,6 +130,14 @@ public class PaperService {
 		return getByIds(paperIds, loggedAuthor);
 	}
 	
+	public String getQuotedBy(String paperId) throws IOException {
+		HashMap<String, String> values = new HashMap<>();
+		values.put("quotedPaper", "https://github.com/ivanmihajlov/papers_please/scientific_papers/" + paperId);
+		Set<String> paperURLs = FusekiReader.executeQuery(QUOTES_FILE_PATH, values);
+		Set<String> paperIds = getIdsFromUrls(paperURLs);
+		return getByIds(paperIds, "");
+	}
+	
 	public String save(String scientificPaperXml, String paperVersion) throws Exception {
 		// validate paper XML using the paper schema
 		Document document = DOMParser.buildDocument(scientificPaperXml, spSchemaPath);
@@ -137,9 +170,9 @@ public class PaperService {
 
 		// titles
 		NodeList titlesNodeList = paperElement.getElementsByTagName("title");
-		for (int i = 0; i < titlesNodeList.getLength(); i++) {
+		for (int i = 0; i < 2; i++) { // there could only be 2 titles
 			Element titleElement = (Element) titlesNodeList.item(i);
-			titleElement.setAttribute("rdfa:property", "pred:title");
+			titleElement.setAttribute("rdfa:property", "pred:titled");
 			titleElement.setAttribute("rdfa:datatype", "xs:string");
 		}
 
@@ -210,7 +243,6 @@ public class PaperService {
 	}
 	
 	public void generateIds(Document document, String paperId) throws MaxChapterLevelsExceededException {
-
 		// set abstract ID
 		Element abstractEl = (Element) document.getElementsByTagName("abstract").item(0);
 		abstractEl.setAttribute("id", paperId + "/abstract");
@@ -252,7 +284,6 @@ public class PaperService {
 	
 	// set subchapter IDs recursively
 	public void setSubchapterIds(Element chapter, String parentId, int levelCount) throws MaxChapterLevelsExceededException {
-
 		if (levelCount > maxChapterLevels)
 			throw new MaxChapterLevelsExceededException("Allowed chapter levels excedeed, maximum is " + maxChapterLevels);
 

@@ -2,3 +2,13 @@
 
 html, body { height: 100%; }
 body { margin: 0; background: #424242; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+#search-input {
+    position: relative;
+    margin-left: 5%;
+    font-size: 16px !important;
+}
+
+#search-icon-btn {
+    cursor: pointer;
+}

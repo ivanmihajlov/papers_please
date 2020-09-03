@@ -4,7 +4,7 @@ export interface Paper {
     paperStatus: string;
     title: string;
     authors: string[];
-    recievedDate: string[];
+    receivedDate: string[];
     acceptedDate: string;
     keywords: string[];
 }

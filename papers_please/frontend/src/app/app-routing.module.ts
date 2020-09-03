@@ -5,13 +5,17 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { HomeComponent } from './home/home.component';
 import { AddPaperFormComponent } from './add-paper-form/add-paper-form.component';
+import { AuthorPapersComponent } from './author-papers/author-papers.component';
+import { QuotedPapersComponent } from './quoted-papers/quoted-papers.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
   { path: 'logout', component: LogoutComponent},
-  { path: 'add-paper', component: AddPaperFormComponent}
+  { path: 'add-paper', component: AddPaperFormComponent},
+  { path: 'my-papers', component: AuthorPapersComponent},
+  { path: 'paper-quoted-by/:id', component: QuotedPapersComponent}
 ];
 
 @NgModule({

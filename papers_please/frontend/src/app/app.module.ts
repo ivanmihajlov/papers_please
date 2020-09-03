@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AllowedRoutes } from './_service/allowed-routes.service';
 import { AuthenticationService } from './_service/authentication.service';
+import { PaperService } from './_service/paper.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MaterialModule } from './material/material.module';
@@ -16,6 +17,10 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { HomeComponent } from './home/home.component';
 import { AddPaperFormComponent } from './add-paper-form/add-paper-form.component';
+import { PaperCardComponent } from './paper-card/paper-card.component';
+import { AuthorPapersComponent } from './author-papers/author-papers.component';
+import { QuotedPapersComponent } from './quoted-papers/quoted-papers.component';
+import { SearchFormComponent } from './search-form/search-form.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +30,11 @@ import { AddPaperFormComponent } from './add-paper-form/add-paper-form.component
     LoginComponent,
     LogoutComponent,
     HomeComponent,
-    AddPaperFormComponent
+    AddPaperFormComponent,
+    PaperCardComponent,
+    AuthorPapersComponent,
+    QuotedPapersComponent,
+    SearchFormComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +55,7 @@ import { AddPaperFormComponent } from './add-paper-form/add-paper-form.component
   providers: [
     AllowedRoutes,
     AuthenticationService,
+    PaperService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
