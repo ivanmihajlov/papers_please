@@ -34,24 +34,24 @@
         <div id="btns-div" align="right">
                 <button mat-raised-button color="primary" [matMenuTriggerFor]="viewMenu">View paper</button>
                 <mat-menu #viewMenu="matMenu" yPosition="below">
-                    <button mat-menu-item (click)="viewHtml()"><b>Html</b></button>
-                    <button mat-menu-item (click)="viewPdf()"><b>Pdf</b></button>
-                    <button mat-menu-item (click)="viewXml()"><b>Xml</b></button>
+                    <button mat-menu-item (click)="viewHtml()"><b>HTML</b></button>
+                    <button mat-menu-item (click)="viewPdf()"><b>PDF</b></button>
+                    <button mat-menu-item (click)="viewXml()"><b>XML</b></button>
                     <button mat-menu-item (click)="quotedBy()"><b>Quoted by</b></button>
                 </mat-menu>
                 
                 <button mat-raised-button color="primary" [matMenuTriggerFor]="metadataMenu">View metadata</button>
                 <mat-menu #metadataMenu="matMenu" yPosition="below">
-                        <button mat-menu-item (click)="metadataRdf()"><b>Rdf</b></button>
-                        <button mat-menu-item (click)="metadataJson()"><b>Json</b></button>
+                        <button mat-menu-item (click)="metadataRdf()"><b>RDF</b></button>
+                        <button mat-menu-item (click)="metadataJson()"><b>JSON</b></button>
                 </mat-menu>
                 
                 <span *ngIf="authorView">
                     <button  mat-raised-button color="primary" [matMenuTriggerFor]="letterMenu">View cover letter</button>
                     <mat-menu #letterMenu="matMenu" yPosition="below">
-                            <button mat-menu-item (click)="viewLetterHtml()"><b>Html</b></button>
-                            <button mat-menu-item (click)="viewLetterPdf()"><b>Pdf</b></button>
-                            <button mat-menu-item (click)="viewLetterXml()"><b>Xml</b></button>
+                            <button mat-menu-item (click)="viewLetterHtml()"><b>HTML</b></button>
+                            <button mat-menu-item (click)="viewLetterPdf()"><b>PDF</b></button>
+                            <button mat-menu-item (click)="viewLetterXml()"><b>XML</b></button>
                     </mat-menu>
                 </span>
                 

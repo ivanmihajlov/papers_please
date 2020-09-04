@@ -166,9 +166,9 @@ public class PaperRepository {
 			dbManager.save(paperCollectionId, scientificPaper.getId(),  spXML);
 
 		} catch (JAXBException e) {
-			throw new DatabaseException("Error occured while marshalling scientific paper!");
+			throw new DatabaseException("Error while marshalling scientific paper!");
 		} catch (Exception e) {
-			throw new DatabaseException("Error occured while updating scientific paper!");
+			throw new DatabaseException("Error while updating scientific paper!");
 		}
 	}
 	

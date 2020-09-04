@@ -13,6 +13,8 @@ import org.xmldb.api.modules.XMLResource;
 import com.ftn.papers_please.repository.PublishingProcessRepository;
 import com.ftn.papers_please.util.DOMParser;
 import com.ftn.papers_please.util.FileUtil;
+import com.ftn.papers_please.util.XUpdateTemplate;
+import com.ftn.papers_please.util.DBManager;
 import com.ftn.papers_please.exceptions.CustomUnexpectedException;
 import com.ftn.papers_please.model.publishing_process.PublishingProcess;
 import com.ftn.papers_please.repository.PaperRepository;
@@ -34,6 +36,9 @@ public class PublishingProcessService {
 
 	@Autowired
 	private PaperRepository paperRepository;
+	
+	@Autowired
+	private DBManager dbManager;
 	
 	public List<PublishingProcess> getAll() {
 		return  publishingProcessRepository.getAll();
@@ -77,8 +82,10 @@ public class PublishingProcessService {
 		return id;
 	}
 	
-	public String getAuthorFromProcess(String processId) throws Exception {
-		return publishingProcessRepository.getAuthorFromProcess(processId);
+	public void addCoverLetter(String processId, String coverLetterId) throws Exception {
+		String updatePath = "/publishing-process/paper-version[last()]/cover-letter-id";
+		String xUpdateExpression =  String.format(XUpdateTemplate.UPDATE, updatePath, coverLetterId);
+		dbManager.executeXUpdate(collectionId, xUpdateExpression, processId);
 	}
 	
 	public void updateStatus(String processId, String status) {
@@ -95,6 +102,14 @@ public class PublishingProcessService {
 	
 	public String getProcessStatus(String processId) throws Exception {
 		return publishingProcessRepository.getProcessStatus(processId);
+	}
+	
+	public String getAuthorFromProcess(String processId) throws Exception {
+		return publishingProcessRepository.getAuthorFromProcess(processId);
+	}
+	
+	public String getCoverLetterByPaperId(String paperId) throws Exception {
+		return publishingProcessRepository.getCoverLetterByPaperId(paperId);
 	}
 	
 	public void assignEditor(String processId, String userId) throws Exception {

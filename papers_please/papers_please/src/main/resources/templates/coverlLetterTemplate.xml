@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cover_letter xmlns="https://github.com/ivanmihajlov/papers_please/cover_letter"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <cover_letter_header>My cover letter</cover_letter_header>
+    <sender>
+        <sender_name>Mare Maric</sender_name>
+        <university_name>Faculty of Technical Sciences</university_name>
+        <university_address>
+            <street>Trg Dositeja Obradovića</street>
+            <street_number>6</street_number>
+            <city>Novi Sad</city>
+            <country>Serbia</country>
+            <postal_number>21000</postal_number>
+        </university_address>
+        <phone_number>+38121123456</phone_number>
+        <email>mare.maric@gmail.com</email>
+    </sender>
+    <recipient>
+        <recipient_name>Testko Tesic</recipient_name>
+        <recipient_role>Editor</recipient_role>
+        <journal_name>Papers</journal_name>
+    </recipient>
+    <date>2020-09-03</date>
+    <cover_letter_body>Please accept my paper</cover_letter_body>
+    <cover_letter_closing>
+        <sender_name>Mare Maric</sender_name>
+        <academic_title>PhD</academic_title>
+        <department_name>Mathematics Dept.</department_name>
+        <university_name>Faculty of Technical Sciences, Novi Sad, Serbia</university_name>
+    </cover_letter_closing>
+</cover_letter>

@@ -1,4 +1,7 @@
 <app-header></app-header>
+<div>
+    <h1 id='label'>Paper submission</h1>
+</div>
 <form id="add-paper-form" [formGroup]="form">
     <mat-card id="add-paper-card">
         <h3>Submit a new paper</h3>
@@ -11,6 +14,21 @@
             </button>
             <button class='submit-btn' mat-raised-button color="primary" (click)="submitPaper()">
                 Submit paper
+            </button>
+        </div>
+    </mat-card>
+    <br>
+    <mat-card id="add-paper-card">
+        <h3>Submit paper's cover letter</h3>
+        <br />
+        <div>
+            <input hidden formControlName="coverLetter" id="coverLetter" type="file" name="file"
+                (change)="letterFileChange($event.target.files)" accept=".xml">
+            <button class="margin5" mat-raised-button (click)="openLetterInput()" [disabled]="!isPaperSubmitted">
+                Choose file...
+            </button>
+            <button class='submit-btn' mat-raised-button color="primary" (click)="submitLetter()" [disabled]="!isPaperSubmitted">
+                Submit cover letter
             </button>
         </div>
     </mat-card>

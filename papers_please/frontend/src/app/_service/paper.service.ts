@@ -46,6 +46,18 @@ export class PaperService {
     window.open(URL + '/html/' + paperId, '_blank');
   }
 
+  getLetterPdf(paperId: string) {
+    window.open(URL + '/' + paperId + '/coverLetter/pdf', '_blank');
+  }
+
+  getLetterXml(paperId: string) {
+    window.open(URL + '/' + paperId + '/coverLetter/xml', '_blank');
+  }
+
+  getLetterHtml(paperId: string) {
+    window.open(URL + '/' + paperId + '/coverLetter/html', '_blank');
+  }
+
   getMetadataRdf(paperId: string): Observable<string> {
     return this.http.get(URL + '/metadata/xml/' + paperId, { responseType: 'text' });
   }

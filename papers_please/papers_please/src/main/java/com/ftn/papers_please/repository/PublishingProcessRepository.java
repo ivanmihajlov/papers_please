@@ -126,6 +126,21 @@ public class PublishingProcessRepository {
 		return id;
 	}
 	
+	public void save(String publishingProcessXml, String id) throws Exception {
+		dbManager.save(publishingProcessCollectionId, id, publishingProcessXml);
+	}
+	
+	public void save(PublishingProcess process) {
+		try {
+			String publishingProcessXml = marshallPublishingProcess(process);
+			dbManager.save(publishingProcessCollectionId, process.getId(), publishingProcessXml);
+		} catch (JAXBException e) {
+			throw new DatabaseException("Error while marshalling publishing process!");
+		} catch (Exception e) {
+			throw new DatabaseException("Error while saving publishing process!");
+		}
+	}
+	
 	public void updateStatus(String processId, String newStatus) throws Exception {
 		String updatePath = "/publishing-process/@status";
 		String xUpdateExpression = String.format(XUpdateTemplate.UPDATE, updatePath, newStatus);
@@ -164,19 +179,13 @@ public class PublishingProcessRepository {
 		return status;
 	}
 	
-	public void save(String publishingProcessXml, String id) throws Exception {
-		dbManager.save(publishingProcessCollectionId, id, publishingProcessXml);
-	}
-	
-	public void save(PublishingProcess process) {
-		try {
-			String processXML = marshallPublishingProcess(process);
-			dbManager.save(publishingProcessCollectionId, process.getId(),  processXML);
-		} catch (JAXBException e) {
-			throw new DatabaseException("Error while marshalling publishing process.");
-		} catch (Exception e) {
-			throw new DatabaseException("Error while updating publishing process.");
-		}
+	public String getCoverLetterByPaperId(String paperId) throws Exception{
+		String xQueryPath = "./src/main/resources/xQuery/getCoverLetterByPaperId.txt";
+		HashMap<String, String> params = new HashMap<>();
+		params.put("id", paperId);
+		ResourceSet rs = dbManager.executeXQuery(publishingProcessCollectionId, "", params, xQueryPath);
+		String letterId = rs.getIterator().nextResource().getContent().toString();
+		return letterId;
 	}
 	
 	private PublishingProcess unmarshallPublishingProcess(String publishingProcessXML) throws JAXBException {

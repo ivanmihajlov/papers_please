@@ -29,7 +29,7 @@ export class PaperCardComponent implements OnInit {
               private utilService: UtilService,
               private authorPapersComponent: AuthorPapersComponent,
               private toastr: ToastrService,
-              private router: Router) { }
+              public router: Router) { }
 
   ngOnInit() {
   }
@@ -112,6 +112,18 @@ export class PaperCardComponent implements OnInit {
 
   viewPdf() {
     this.paperService.getPdf(this.paper.id);
+  }
+
+  viewLetterHtml() {
+    this.paperService.getLetterHtml(this.paper.id);
+  }
+
+  viewLetterPdf() {
+    this.paperService.getLetterPdf(this.paper.id);
+  }
+
+  viewLetterXml() {
+    this.paperService.getLetterXml(this.paper.id);
   }
 
 }

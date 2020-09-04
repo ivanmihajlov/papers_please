@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.xmldb.api.modules.XMLResource;
 
 import com.ftn.papers_please.service.PublishingProcessService;
+import com.ftn.papers_please.service.CoverLetterService;
 import com.ftn.papers_please.dto.SearchData;
 import com.ftn.papers_please.security.TokenUtils;
 import com.ftn.papers_please.service.PaperService;
@@ -36,6 +37,9 @@ public class PaperController {
 
 	@Autowired
 	private PublishingProcessService publishingProcessService;
+	
+	@Autowired
+	private CoverLetterService coverLetterService;
 	
 	@Autowired
 	private TokenUtils tokenUtils;
@@ -126,6 +130,30 @@ public class PaperController {
 	public ResponseEntity<String> getMetadataJson(@PathVariable("id") String id) throws Exception {
 		String metadata = paperService.getMetadataJson(id);
 		return new ResponseEntity<>(metadata, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/{id}/coverLetter/xml", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<String> getCoverLetterXml(@PathVariable("id") String paperId) throws Exception {
+		String coverLetterId = publishingProcessService.getCoverLetterByPaperId(paperId);
+		String letterXml = coverLetterService.findOneXml(coverLetterId).getContent().toString();
+		return new ResponseEntity<>(letterXml, HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/{id}/coverLetter/html", produces = MediaType.TEXT_HTML_VALUE)
+	public ResponseEntity<String> getCoverLetterHtml(@PathVariable("id") String paperId) throws Exception {
+		String coverLetterId = publishingProcessService.getCoverLetterByPaperId(paperId);
+		byte[] resource = coverLetterService.findOneHtml(coverLetterId);
+		return new ResponseEntity<>(new String(resource), HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/{id}/coverLetter/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
+	public ResponseEntity<byte[]> getCoverLetterPdf(@PathVariable("id") String paperId) throws Exception {
+		String coverLetterId = publishingProcessService.getCoverLetterByPaperId(paperId);
+		byte[] contents = coverLetterService.findOnePdf(coverLetterId);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_PDF);
+		headers.add("Content-Disposition", "inline; filename=" + coverLetterId + ".pdf");
+		return new ResponseEntity<>(contents, headers, HttpStatus.OK);
 	}
 	
 }
