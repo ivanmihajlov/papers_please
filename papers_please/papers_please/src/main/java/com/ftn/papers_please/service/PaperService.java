@@ -19,6 +19,7 @@ import org.xmldb.api.modules.XMLResource;
 import com.ftn.papers_please.repository.PaperRepository;
 import com.ftn.papers_please.util.DOMParser;
 import com.ftn.papers_please.util.XSLFOTransformer;
+import com.ftn.papers_please.util.FileUtil;
 import com.ftn.papers_please.repository.PublishingProcessRepository;
 import com.ftn.papers_please.dto.SearchData;
 import com.ftn.papers_please.exceptions.MaxChapterLevelsExceededException;
@@ -38,6 +39,9 @@ public class PaperService {
 
 	@Value("${paper-schema-path}")
 	private String paperSchemaPath;
+	
+	@Value("${paper-template-path}")
+	private String paperTemplatePath;
 	
 	@Value("${max-chapter-levels}")
 	private int maxChapterLevels;
@@ -375,6 +379,10 @@ public class PaperService {
 
 	public String getMetadataJson(String id) throws Exception {
 		return paperRepository.getMetadataJson(id);
+	}
+	
+	public String getTemplate() throws IOException {
+		return FileUtil.readFile(paperTemplatePath);
 	}
 	
 }

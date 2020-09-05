@@ -38,6 +38,10 @@ export class PaperService {
     return this.http.get(URL + '/' + paperId + '/quotes', { responseType: 'text' });
   }
 
+  getTemplate(): Observable<string> {
+    return this.http.get(URL + '/template', { responseType: 'text' });
+  }
+
   getXml(paperId: string) {
     window.open(URL + '/xml/' + paperId, '_blank');
   }

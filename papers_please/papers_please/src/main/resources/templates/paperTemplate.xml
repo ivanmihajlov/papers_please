@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scientific_paper xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+ xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+ xmlns:pred="https://github.com/ivanmihajlov/papers_please/predicate/"
+ xmlns:rdfa="http://www.w3.org/ns/rdfa#"
+ xmlns="https://github.com/ivanmihajlov/papers_please"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="https://github.com/ivanmihajlov/papers_please file:/C:/Users/mihaj/Desktop/xsd/scientific_paper.xsd" id="ID001" status="PENDING" version="1">
+    <head>
+        <received_date>2020-09-05</received_date>
+        <revised_date>2020-09-05</revised_date>
+        <accepted_date>2020-09-05</accepted_date>
+        <title lang="lang1">Title</title>
+        <title lang="lang2">Subtitle</title>
+        <author>
+            <first_name>Author1Name</first_name>
+            <middle_name>A</middle_name>
+            <last_name>Author1Surname</last_name>
+            <email>author1@gmail.com</email>
+            <affiliation>
+                <name>Institution1</name>
+                <city>City1</city>
+                <state>State1</state>
+                <country>Country1</country>
+            </affiliation>
+        </author>
+        <author>
+            <first_name>Author2Name</first_name>
+            <middle_name>B</middle_name>
+            <last_name>Author1Surname</last_name>
+            <email>author2@gmail.com</email>
+            <affiliation>
+                <name>Institution2</name>
+                <city>City2</city>
+                <state>State2</state>
+                <country>Country2</country>
+            </affiliation>
+        </author>
+        <keyword>scientific</keyword>
+        <keyword>paper</keyword>
+        <keyword>template</keyword>
+    </head>
+    <body>
+        <abstract id="ID003">
+            <paragraph id="ID005">
+                <b>
+                    <i>
+                    </i>
+                    <i>
+                    </i>
+                </b>
+                <i>
+                    <i>
+                    </i>
+                    <b>
+                    </b>
+                </i>
+                <u>
+                    <b>
+                    </b>
+                    <b>
+                    </b>
+                </u>
+                <unordered_list id="ID007" style="circle">
+                    <item>item0</item>
+                    <item>item1</item>
+                </unordered_list>
+                <ordered_list id="ID009" type="1">
+                    <item>item2</item>
+                    <item>item3</item>
+                </ordered_list>
+                <quote id="ID011">
+                    <source>paper0</source>
+                    <text>Quoted text</text>
+                </quote>
+                <b>
+                    <i>
+                    </i>
+                    <b>
+                    </b>
+                </b>
+                <i>
+                    <b>
+                    </b>
+                    <b>
+                    </b>
+                </i>
+                <u>
+                    <i>
+                    </i>
+                    <i>
+                    </i>
+                </u>
+                <unordered_list id="ID013" style="circle">
+                    <item>item4</item>
+                    <item>item5</item>
+                </unordered_list>
+                <ordered_list id="ID015" type="1">
+                    <item>item6</item>
+                    <item>item7</item>
+                </ordered_list>
+            </paragraph>
+            <paragraph id="ID019">
+                <b>
+                    <b>
+                    </b>
+                    <u>
+                    </u>
+                </b>
+                <i>
+                    <u>
+                    </u>
+                    <u>
+                    </u>
+                </i>
+                <u>
+                    <b>
+                    </b>
+                    <b>
+                    </b>
+                </u>
+                <unordered_list id="ID021" style="circle">
+                    <item>item8</item>
+                    <item>item9</item>
+                </unordered_list>
+                <ordered_list id="ID023" type="1">
+                    <item>item10</item>
+                    <item>item11</item>
+                </ordered_list>
+                <b>
+                    <i>
+                    </i>
+                    <i>
+                    </i>
+                </b>
+                <i>
+                    <b>
+                    </b>
+                    <u>
+                    </u>
+                </i>
+                <u>
+                    <u>
+                    </u>
+                    <u>
+                    </u>
+                </u>
+                <unordered_list id="ID027" style="circle">
+                    <item>item12</item>
+                    <item>item13</item>
+                </unordered_list>
+                <ordered_list id="ID029" type="1">
+                    <item>item14</item>
+                    <item>item15</item>
+                </ordered_list>
+            </paragraph>
+        </abstract>
+        <chapter id="ID033" level="3">
+            <heading>Chapter1</heading>
+            <paragraph id="ID035">
+                <table id="ID037">
+                    <name>Table1</name>
+                    <description>Description1</description>
+                    <tr>
+                        <td>td0</td>
+                        <td>td1</td>
+                    </tr>
+                    <tr>
+                        <th>th0</th>
+                        <th>th1</th>
+                    </tr>
+                </table>
+                <b>
+                    <i>
+                    </i>
+                    <u>
+                    </u>
+                </b>
+                <i>
+                    <b>
+                    </b>
+                    <u>
+                    </u>
+                </i>
+                <u>
+                    <b>
+                    </b>
+                    <u>
+                    </u>
+                </u>
+                <unordered_list id="ID039" style="circle">
+                    <item>item16</item>
+                    <item>item17</item>
+                </unordered_list>
+                <ordered_list id="ID041" type="1">
+                    <item>item18</item>
+                    <item>item19</item>
+                </ordered_list>
+            </paragraph>
+            <paragraph id="ID045">
+                <table id="ID047">
+                    <name>Table2</name>
+                    <description>Description2</description>
+                    <tr>
+                        <td>td2</td>
+                        <td>td3</td>
+                    </tr>
+                    <tr>
+                        <th>th2</th>
+                        <th>th3</th>
+                    </tr>
+                </table>
+                <table id="ID049">
+                    <name>Table3</name>
+                    <description>Description3</description>
+                    <tr>
+                        <th>th4</th>
+                        <th>th5</th>
+                    </tr>
+                    <tr>
+                        <td>td4</td>
+                        <td>td5</td>
+                    </tr>
+                </table>
+            </paragraph>
+        </chapter>
+        <chapter id="ID051" level="3">
+            <heading>Chapter2</heading>
+            <paragraph id="ID053">
+                <table id="ID055">
+                    <name>Table4</name>
+                    <description>Description4</description>
+                    <tr>
+                        <th>th6</th>
+                        <th>th7</th>
+                    </tr>
+                    <tr>
+                        <td>td6</td>
+                        <td>td7</td>
+                    </tr>
+                </table>
+                <table id="ID057">
+                    <name>Table5</name>
+                    <description>Description5</description>
+                    <tr>
+                        <td>td8</td>
+                        <td>td9</td>
+                    </tr>
+                    <tr>
+                        <td>td10</td>
+                        <td>td11</td>
+                    </tr>
+                </table>
+            </paragraph>
+            <paragraph id="ID059">
+                <b>
+                    <b>
+                    </b>
+                    <b>
+                    </b>
+                </b>
+                <i>
+                    <b>
+                    </b>
+                    <i>
+                    </i>
+                </i>
+                <u>
+                    <u>
+                    </u>
+                    <b>
+                    </b>
+                </u>
+                <unordered_list id="ID061" style="circle">
+                    <item>item20</item>
+                    <item>item21</item>
+                </unordered_list>
+                <ordered_list id="ID063" type="1">
+                    <item>item22</item>
+                    <item>item23</item>
+                </ordered_list>
+                <b>
+                    <b>
+                    </b>
+                    <u>
+                    </u>
+                </b>
+                <i>
+                    <u>
+                    </u>
+                    <i>
+                    </i>
+                </i>
+                <u>
+                    <i>
+                    </i>
+                    <u>
+                    </u>
+                </u>
+                <unordered_list id="ID067" style="circle">
+                    <item>item24</item>
+                    <item>item25</item>
+                </unordered_list>
+                <ordered_list id="ID069" type="1">
+                    <item>item26</item>
+                    <item>item27</item>
+                </ordered_list>
+            </paragraph>
+        </chapter>
+        <references>
+            <reference>
+                <paper_id>paper0</paper_id>
+                <title>Title</title>
+                <reference_author>
+                    <first_name>Author1Name</first_name>
+                    <middle_name>A</middle_name>
+                    <last_name>Author1Surname</last_name>
+                </reference_author>
+                <reference_author>
+                    <first_name>Author2Name</first_name>
+                    <middle_name>B</middle_name>
+                    <last_name>Author2Surname</last_name>
+                </reference_author>
+                <publisher>Publisher</publisher>
+                <year_of_publication>2020</year_of_publication>
+                <pages>Pages 10-11</pages>
+            </reference>
+        </references>
+    </body>
+</scientific_paper>

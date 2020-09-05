@@ -6,7 +6,7 @@
         <sender_name>Mare Maric</sender_name>
         <university_name>Faculty of Technical Sciences</university_name>
         <university_address>
-            <street>Trg Dositeja Obradovića</street>
+            <street>Trg Dositeja Obradovica</street>
             <street_number>6</street_number>
             <city>Novi Sad</city>
             <country>Serbia</country>
@@ -16,7 +16,7 @@
         <email>mare.maric@gmail.com</email>
     </sender>
     <recipient>
-        <recipient_name>Testko Tesic</recipient_name>
+        <recipient_name>Testko Testic</recipient_name>
         <recipient_role>Editor</recipient_role>
         <journal_name>Papers</journal_name>
     </recipient>

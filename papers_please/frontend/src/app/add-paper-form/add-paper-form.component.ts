@@ -22,7 +22,8 @@ export class AddPaperFormComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private paperService: PaperService,
               private letterService: CoverLetterService,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService,
+              private router: Router) { }
 
   ngOnInit() {
     this.createForm();
@@ -98,6 +99,11 @@ export class AddPaperFormComponent implements OnInit {
         }
       })
     );
+  }
+
+  openEditor() {
+    localStorage.setItem('revisionData', JSON.stringify({paperTitle: this.revisionPaperTitle, processId: this.revisionProcessId}));
+    this.router.navigate(['/add-paper-editor']);
   }
 
   openPaperInput() {

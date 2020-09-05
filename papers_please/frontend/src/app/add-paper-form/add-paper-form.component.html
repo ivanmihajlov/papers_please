@@ -13,10 +13,14 @@
             <button class="margin5" mat-raised-button (click)="openPaperInput()">
                 Choose file...
             </button>
-            <button class='submit-btn' mat-raised-button color="primary" (click)="submitPaper()">
+            <button class='submit-btn' mat-raised-button color="accent" (click)="submitPaper()">
                 Submit paper
             </button>
         </div>
+        <br />
+        <button id="xml-editor-btn" mat-raised-button color="primary" (click)="openEditor()">
+                XML editor
+        </button>
     </mat-card>
     <br>
     <mat-card id="add-paper-card">
@@ -28,7 +32,7 @@
             <button class="margin5" mat-raised-button (click)="openLetterInput()" [disabled]="!isPaperSubmitted">
                 Choose file...
             </button>
-            <button class='submit-btn' mat-raised-button color="primary" (click)="submitLetter()" [disabled]="!isPaperSubmitted">
+            <button class='submit-btn' mat-raised-button color="accent" (click)="submitLetter()" [disabled]="!isPaperSubmitted">
                 Submit cover letter
             </button>
         </div>

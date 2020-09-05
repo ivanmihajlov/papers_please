@@ -1,0 +1,10 @@
+<app-header></app-header>
+<mat-card id='sp-editor'>
+        <h2 *ngIf="!revisionPaperTitle">Submit a new paper</h2>
+        <h2 *ngIf="revisionPaperTitle">Add revision of {{revisionPaperTitle}}</h2>
+        <div id="xonomy-editor"></div>
+        <br/>
+        <button mat-raised-button color="basic" (click)="loadTemplate()">Load template</button>
+        <button mat-raised-button color="accent" (click)="addPaperXonomy()">Submit paper</button>
+        <button mat-raised-button color="primary" (click)="openClEditor()" [disabled]="!isPaperSubmitted">Add cover letter</button>
+</mat-card>

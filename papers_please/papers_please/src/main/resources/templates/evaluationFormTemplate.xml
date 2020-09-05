@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<evaluation_form xmlns="https://github.com/ivanmihajlov/papers_please"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <reviewer>
+        <first_name>Name</first_name>
+        <last_name>Surname</last_name>
+        <email>mymail@gmail.com</email>
+    </reviewer>
+    <scientific_paper_title>Title</scientific_paper_title>
+    <scientific_paper_summary>Summary</scientific_paper_summary>
+    <suggestions>
+        <suggestion>
+            <ref>Quote</ref>
+            <comment>Comment</comment>
+        </suggestion>
+    </suggestions>
+    <overall_recommendation>
+        <recommendation>Minor Revision</recommendation>
+        <recommendation_comment>Correct issues</recommendation_comment>
+    </overall_recommendation>
+</evaluation_form>

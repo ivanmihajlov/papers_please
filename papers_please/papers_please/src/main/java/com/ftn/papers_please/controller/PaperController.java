@@ -123,6 +123,11 @@ public class PaperController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/template", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<String> getScientificPaperTemplate() throws Exception {
+		return new ResponseEntity<>(paperService.getTemplate(), HttpStatus.OK);
+	}
+	
 	@GetMapping(value = "/{id}/quotes", produces = MediaType.APPLICATION_XML_VALUE)
 	public ResponseEntity<String> getQuotedBy(@PathVariable("id") String paperId) throws Exception {
 		return new ResponseEntity<>(paperService.getQuotedBy(paperId), HttpStatus.OK);
