@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scientific_paper xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+ xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+ xmlns:pred="https://github.com/ivanmihajlov/papers_please/predicate/"
+ xmlns:rdfa="http://www.w3.org/ns/rdfa#"
+ xmlns="https://github.com/ivanmihajlov/papers_please"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="https://github.com/ivanmihajlov/papers_please file:/C:/Users/mihaj/Desktop/xsd/scientific_paper.xsd" id="ID001" status="PENDING" version="1">
+    <head>
+        <received_date>2020-09-05</received_date>
+        <revised_date>2020-09-05</revised_date>
+        <accepted_date>2020-09-05</accepted_date>
+        <title lang="lang1">Moon mining</title>
+        <title lang="lang3">Prospects of moon mining industry</title>
+        <author>
+            <first_name>Mare</first_name>
+            <middle_name>M</middle_name>
+            <last_name>Maric</last_name>
+            <email>mare.maric@gmail.com</email>
+            <affiliation>
+                <name>Faculty of Technical Sciences</name>
+                <city>Novi Sad</city>
+                <state>Vojvodina</state>
+                <country>Serbia</country>
+            </affiliation>
+        </author>
+        <author>
+            <first_name>Mika</first_name>
+            <middle_name>M</middle_name>
+            <last_name>Mikic</last_name>
+            <email>mika.mikic@gmail.com</email>
+            <affiliation>
+                <name>Faculty of Technical Sciences</name>
+                <city>Novi Sad</city>
+                <state>Vojvodina</state>
+                <country>Serbia</country>
+            </affiliation>
+        </author>
+        <keyword>moon</keyword>
+        <keyword>mining</keyword>
+        <keyword>industry</keyword>
+        <keyword>space</keyword>
+    </head>
+    <body>
+        <abstract id="ID003">
+            <paragraph id="ID005">
+                paragraph1
+                <quote id="ID011">
+                    <source>paper0</source>
+                    <text>Quoted text</text>
+                </quote>
+            </paragraph>
+            <paragraph id="ID019">
+                paragraph2
+            </paragraph>
+        </abstract>
+        <chapter id="ID033" level="3">
+            <heading>heading0</heading>
+            <paragraph id="ID035">
+                paragraph3
+            </paragraph>
+            <paragraph id="ID045">
+                paragraph4
+            </paragraph>
+        </chapter>
+        <chapter id="ID051" level="3">
+            <heading>heading1</heading>
+            <paragraph id="ID053">
+                paragraph5
+            </paragraph>
+            <paragraph id="ID059">
+                paragraph6
+            </paragraph>
+        </chapter>
+        <references>
+            <reference>
+                <paper_id>paper0</paper_id>
+                <title>Moon mining</title>
+                <reference_author>
+                    <first_name>Mare</first_name>
+                    <middle_name>M</middle_name>
+                    <last_name>Maric</last_name>
+                </reference_author>
+                <reference_author>
+                    <first_name>Mika</first_name>
+                    <middle_name>M</middle_name>
+                    <last_name>Mikic</last_name>
+                </reference_author>
+                <publisher>Papers, please!</publisher>
+                <year_of_publication>2020</year_of_publication>
+                <pages>Page 43</pages>
+            </reference>
+        </references>
+    </body>
+</scientific_paper>

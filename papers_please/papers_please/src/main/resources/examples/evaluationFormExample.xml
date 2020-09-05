@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<evaluation_form xmlns="https://github.com/ivanmihajlov/papers_please/evaluation_form"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://github.com/ivanmihajlov/papers_please file:/C:/Users/mihaj/Desktop/xsd/evaluation_form.xsd">
+    <reviewer>
+        <first_name>Iva</first_name>
+        <last_name>Ivic</last_name>
+        <email>ivaivic@gmail.com</email>
+    </reviewer>
+    <scientific_paper_title>Moon mining</scientific_paper_title>
+    <scientific_paper_summary>Prospects of moon mining industry</scientific_paper_summary>
+    <suggestions>
+        <suggestion>
+            <ref>Paper text</ref>
+            <comment>My comment</comment>
+        </suggestion>
+    </suggestions>
+    <overall_recommendation>
+        <recommendation>Minor Revision</recommendation>
+        <recommendation_comment>Correct issues</recommendation_comment>
+    </overall_recommendation>
+</evaluation_form>
