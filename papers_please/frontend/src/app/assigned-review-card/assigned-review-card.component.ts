@@ -37,7 +37,7 @@ export class AssignedReviewCardComponent implements OnInit {
     reader.readAsText(files[0], 'UTF-8');
     reader.onload = () => {
         this.reviewXml = reader.result.toString();
-        this.toastr.success('Success', 'File uploaded');
+        this.toastr.success('Success', 'File accepted, ready to submit');
     };
     reader.onerror = () => {
       this.toastr.error('Error', 'Cannot read the file');
@@ -68,6 +68,11 @@ export class AssignedReviewCardComponent implements OnInit {
 
   openReviewInput() {
     document.getElementById('review').click();
+  }
+
+  openEditor() {
+    localStorage.setItem('processId', this.reviewInfo.processId);
+    this.router.navigate(['/review-editor']);
   }
 
   viewHtml() {

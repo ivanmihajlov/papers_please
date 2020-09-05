@@ -90,6 +90,9 @@ export class AddPaperFormComponent implements OnInit {
       (response => {
         this.toastr.success('Success', 'Your cover letter was submitted');
         this.processId = response.toString();
+        setTimeout(() => {
+          this.router.navigate(['/my-papers']);
+        }, 2000);
       }), (error => {
         if (error.error.exception) {
           this.toastr.error('Error', error.error.exception);
@@ -119,7 +122,7 @@ export class AddPaperFormComponent implements OnInit {
     reader.readAsText(files[0], 'UTF-8');
     reader.onload = () => {
         this.paper = reader.result.toString();
-        this.toastr.success('Success', 'File uploaded');
+        this.toastr.success('Success', 'File accepted, ready to submit');
     };
     reader.onerror = () => {
       this.toastr.error('Error', 'Failed to read the file');
@@ -131,7 +134,7 @@ export class AddPaperFormComponent implements OnInit {
     reader.readAsText(files[0], 'UTF-8');
     reader.onload  = () => {
         this.letter = reader.result.toString();
-        this.toastr.success('Success', 'File uploaded');
+        this.toastr.success('Success', 'File accepted, ready to submit');
     };
     reader.onerror = () => {
       this.toastr.error('Error', 'Failed to read the file');

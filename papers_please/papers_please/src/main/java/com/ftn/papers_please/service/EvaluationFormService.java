@@ -1,6 +1,7 @@
 package com.ftn.papers_please.service;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +13,7 @@ import org.xmldb.api.modules.XMLResource;
 
 import com.ftn.papers_please.repository.EvaluationFormRepository;
 import com.ftn.papers_please.util.XSLFOTransformer;
+import com.ftn.papers_please.util.FileUtil;
 import com.ftn.papers_please.util.DOMParser;
 import com.ftn.papers_please.exceptions.CustomUnexpectedException;
 import com.ftn.papers_please.model.evaluation_form.EvaluationForm;
@@ -24,6 +26,9 @@ public class EvaluationFormService {
 
 	@Value("${evaluation-form-schema-path}")
 	private String evaluationFormSchemaPath;
+	
+	@Value("${evaluation-form-template-path}")
+	private String efTemplatePath;
 	
 	@Autowired
 	private XSLFOTransformer xslfoTransformer;
@@ -96,5 +101,9 @@ public class EvaluationFormService {
     	ByteArrayOutputStream evaluationFormHtml = xslfoTransformer.generateHTML(merged, xslPath); 
 		return evaluationFormHtml.toByteArray();
     }
+	
+	public String getTemplate() throws IOException {
+		return FileUtil.readFile(efTemplatePath);
+	}
 	
 }

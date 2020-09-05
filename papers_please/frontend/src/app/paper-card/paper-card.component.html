@@ -14,16 +14,6 @@
                     <b>Keywords:</b> <span *ngFor="let keyword of paper.keywords"> {{ keyword }} </span>
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <b>Date submitted:</b> {{ paper.receivedDate }}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <b>Date published:</b> {{ paper.acceptedDate }}
-                </td>
-            </tr>
             <tr *ngIf="router.url !== '/'">
                 <td>
                     <b>Status:</b> {{ paper.paperStatus }}

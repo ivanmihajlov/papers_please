@@ -124,7 +124,7 @@ public class PaperController {
 	}
 	
 	@GetMapping(value = "/template", produces = MediaType.APPLICATION_XML_VALUE)
-	public ResponseEntity<String> getScientificPaperTemplate() throws Exception {
+	public ResponseEntity<String> getTemplate() throws Exception {
 		return new ResponseEntity<>(paperService.getTemplate(), HttpStatus.OK);
 	}
 	

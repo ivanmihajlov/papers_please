@@ -9,15 +9,15 @@
   color: white;
 }
 
-#add-paper-form{
-    margin-top: 4%;
+#add-paper-form {
+    margin-top: 3%;
     margin-left: auto;
     margin-right: auto;
     width: 40%;
     text-align: center;
 }
 
-#add-paper-card{
+#add-paper-card, #add-letter-card {
     display: flex;
     flex-direction: column;
 }

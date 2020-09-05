@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<evaluation_form xmlns="https://github.com/ivanmihajlov/papers_please"
+<evaluation_form xmlns="https://github.com/ivanmihajlov/papers_please/evaluation_form"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <reviewer>
         <first_name>Name</first_name>

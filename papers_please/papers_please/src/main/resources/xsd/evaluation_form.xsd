@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="https://github.com/ivanmihajlov/papers_please"
-    xmlns="https://github.com/ivanmihajlov/papers_please">
+    targetNamespace="https://github.com/ivanmihajlov/papers_please/evaluation_form"
+    xmlns="https://github.com/ivanmihajlov/papers_please/evaluation_form">
     <xs:element name="evaluation_form">
         <xs:complexType>
             <xs:sequence>

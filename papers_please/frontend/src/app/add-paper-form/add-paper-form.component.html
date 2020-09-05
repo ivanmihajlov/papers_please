@@ -18,12 +18,12 @@
             </button>
         </div>
         <br />
-        <button id="xml-editor-btn" mat-raised-button color="primary" (click)="openEditor()">
+        <button id="xml-editor-btn" mat-raised-button color="primary" (click)="openEditor()" [disabled]="isPaperSubmitted">
                 XML editor
         </button>
     </mat-card>
     <br>
-    <mat-card id="add-paper-card">
+    <mat-card id="add-letter-card">
         <h3>Submit paper's cover letter</h3>
         <br />
         <div>

@@ -59,6 +59,10 @@ export class ReviewService {
     return this.http.get('http://localhost:8088/api/reviewers/assignedReviews');
   }
 
+  getTemplate(): Observable<string> {
+    return this.http.get('http://localhost:8088/api/evaluationForms/template', { responseType: 'text' });
+  }
+
   submitEvaluationForm(reviewXml: string, processId: string): Observable<any> {
     return this.http.post(`http://localhost:8088/api/evaluationForms/${processId}`, reviewXml, this.httpOptions);
   }

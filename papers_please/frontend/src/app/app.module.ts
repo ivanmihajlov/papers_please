@@ -31,6 +31,8 @@ import { ReviewRequestsComponent } from './review-requests/review-requests.compo
 import { ReviewRequestCardComponent } from './review-request-card/review-request-card.component';
 import { AssignedReviewCardComponent } from './assigned-review-card/assigned-review-card.component';
 import { PaperEditorComponent } from './paper-editor/paper-editor.component';
+import { CoverLetterEditorComponent } from './cover-letter-editor/cover-letter-editor.component';
+import { ReviewEditorComponent } from './review-editor/review-editor.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { PaperEditorComponent } from './paper-editor/paper-editor.component';
     ReviewRequestsComponent,
     ReviewRequestCardComponent,
     AssignedReviewCardComponent,
-    PaperEditorComponent
+    PaperEditorComponent,
+    CoverLetterEditorComponent,
+    ReviewEditorComponent
   ],
   imports: [
     BrowserModule,

@@ -1,48 +1,28 @@
 <div id="search-form-container">
     <form [formGroup]="searchForm" class="search-form" (ngSubmit)="onSearchSubmit()">
         <mat-card class="search-card">
-            <mat-form-field class="form-filed">
-                <input matInput formControlName="title" placeholder="Title">
-            </mat-form-field>
-            <mat-form-field class="form-filed">
-                <input matInput formControlName="author" placeholder="Author">
-            </mat-form-field>
-            <mat-form-field class="form-filed">
-                <input matInput formControlName="affiliation" placeholder="Affiliation">
-            </mat-form-field>
-            <mat-form-field class="form-filed">
-                <input matInput formControlName="keyword" placeholder="Keyword">
-            </mat-form-field>
-            <span id="dates-container">
-                <mat-form-field>
-                    <input matInput formControlName="acceptedFromDate" [matDatepicker]="pickerAcceptedFrom" placeholder="Published from">
-                    <mat-datepicker-toggle matSuffix [for]="pickerAcceptedFrom"></mat-datepicker-toggle>
-                    <mat-datepicker #pickerAcceptedFrom></mat-datepicker>
-                </mat-form-field>
-                &nbsp;
-                <mat-form-field >
-                    <input matInput formControlName="acceptedToDate" [matDatepicker]="pickerAcceptedTo" placeholder="Published to">
-                    <mat-datepicker-toggle matSuffix [for]="pickerAcceptedTo"></mat-datepicker-toggle>
-                    <mat-datepicker #pickerAcceptedTo></mat-datepicker>
-                </mat-form-field>
-            </span>
-            <span id="dates-container">
-                <mat-form-field>
-                    <input matInput formControlName="receivedFromDate" [matDatepicker]="pickerReceivedFrom" placeholder="Submitted from">
-                    <mat-datepicker-toggle matSuffix [for]="pickerReceivedFrom"></mat-datepicker-toggle>
-                    <mat-datepicker #pickerReceivedFrom></mat-datepicker>
-                </mat-form-field>
-                &nbsp;
-                <mat-form-field >
-                    <input matInput formControlName="receivedToDate" [matDatepicker]="pickerReceivedTo" placeholder="Submitted to">
-                    <mat-datepicker-toggle matSuffix [for]="pickerReceivedTo"></mat-datepicker-toggle>
-                    <mat-datepicker #pickerReceivedTo></mat-datepicker>
-                </mat-form-field>
-            </span>
-            <br>
-            <button mat-raised-button color="primary" type="submit">
-                Search
-            </button>
+            <table>
+                <tr>
+                    <td>
+                        <h1 id="label">Search paper data</h1>
+                        <mat-form-field class="form-field">
+                            <input matInput formControlName="title" placeholder="Title">
+                        </mat-form-field>
+                        <mat-form-field class="form-field">
+                            <input matInput formControlName="author" placeholder="Author">
+                        </mat-form-field>
+                        <mat-form-field class="form-field">
+                            <input matInput formControlName="affiliation" placeholder="Affiliation">
+                        </mat-form-field>
+                        <mat-form-field class="form-field">
+                            <input matInput formControlName="keyword" placeholder="Keyword">
+                        </mat-form-field>
+                        <button mat-raised-button color="primary" type="submit">
+                            Search
+                        </button>
+                    </td>
+                </tr>
+            </table>
         </mat-card>
     </form>
 </div>

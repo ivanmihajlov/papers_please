@@ -11,6 +11,8 @@ import { EditorPageComponent } from './editor-page/editor-page.component';
 import { ReviewRequestsComponent } from './review-requests/review-requests.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { PaperEditorComponent } from './paper-editor/paper-editor.component';
+import { CoverLetterEditorComponent } from './cover-letter-editor/cover-letter-editor.component';
+import { ReviewEditorComponent } from './review-editor/review-editor.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -23,7 +25,9 @@ const routes: Routes = [
   { path: 'submissions-in-process', component: EditorPageComponent},
   { path: 'review-requests', component: ReviewRequestsComponent},
   { path: 'assigned-reviews', component: ReviewsComponent },
-  { path: 'add-paper-editor', component:  PaperEditorComponent}
+  { path: 'add-paper-editor', component:  PaperEditorComponent},
+  { path: 'add-cover-letter-editor', component: CoverLetterEditorComponent},
+  { path: 'review-editor', component: ReviewEditorComponent }
 ];
 
 @NgModule({

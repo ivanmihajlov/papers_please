@@ -1,20 +1,25 @@
 #search-form-container {
-    width: 35%;
-    margin-left: 1%;
+    position: absolute;
+    left: 24%;
+    width: 48%;
     margin-top: 1%;
     box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.3), 6px 6px 20px 6px rgba(0, 0, 0, 0.19);
 }
 
 .form-field {
-    width: 90%;
+    margin-right: 15px;
+    width: auto;
 }
 
 .search-card {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
-#dates-container {
-    display: flex;
-    flex-direction: row;
+#label {
+    margin-bottom: auto;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
 }

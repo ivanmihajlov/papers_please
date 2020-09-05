@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 declare const Xonomy: any;
 
 @Injectable({

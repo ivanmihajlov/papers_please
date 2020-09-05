@@ -67,7 +67,7 @@ public class CoverLetterController {
 	}
 	
 	@GetMapping(value = "/template", produces = MediaType.APPLICATION_XML_VALUE)
-	public ResponseEntity<String> getCoverLetterTemplate() throws Exception {
+	public ResponseEntity<String> getTemplate() throws Exception {
 		return new ResponseEntity<>(coverLetterService.getTemplate(), HttpStatus.OK);
 	}
 	
