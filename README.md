@@ -50,6 +50,7 @@ Demonstration video: https://youtu.be/fpGVptp4XT0
 * After starting the application, register a new user.
 * To give user the editor role:
   * Open [eXide](http://localhost:8080/exist/apps/eXide/) and select *directory* tab in the left panel
+  * Default credentials are **Username:** *admin* **Password**: *[blank]*
   * Go to *db/sample/users* collection and find the desired user, e.g. *user0*
   * Add `<role role="ROLE_EDITOR"/>` to `<roles>` element and click *Save* above
 * Examples of valid XML documents can be found in *papers_please\papers_please\src\main\resources\examples*
