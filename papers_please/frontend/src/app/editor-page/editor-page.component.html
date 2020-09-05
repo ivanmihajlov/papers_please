@@ -1,0 +1,7 @@
+<app-header></app-header>
+<div>
+    <h1 id='label'>Ongoing submissions</h1>
+</div>
+<div id="process-cards">
+    <app-publishing-process-card *ngFor="let publishingProcess of ongoingPublishingProcesses" [publishingProcess]="publishingProcess"></app-publishing-process-card>
+</div>

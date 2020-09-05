@@ -34,6 +34,11 @@ export class PaperCardComponent implements OnInit {
   ngOnInit() {
   }
 
+  addRevision(paperTitle: string, processId: string ) {
+    localStorage.setItem('revisionData', JSON.stringify({paperTitle, processId}));
+    this.router.navigate(['/add-paper']);
+  }
+
   confirmWithdraw(title: string, paperId: string) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: 'Withdraw paper \"' + title + '\"?'

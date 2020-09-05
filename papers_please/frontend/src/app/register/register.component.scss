@@ -14,4 +14,17 @@ mat-card {
 
 mat-form-field {
     width: 100%;
+    font-size: initial;
+}
+
+input:-webkit-autofill {
+    box-shadow: 0 0 0 1000px #424242 inset !important;
+    -webkit-box-shadow: 0 0 0 1000px #424242 inset !important; 
+    -webkit-text-fill-color: white;
+} 
+  
+input:-webkit-autofill:focus {
+    box-shadow: 0 0 0 1000px #424242 inset !important;
+    -webkit-box-shadow: 0 0 0 1000px #424242 inset !important; 
+    -webkit-text-fill-color: white;
 }

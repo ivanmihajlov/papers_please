@@ -1,0 +1,7 @@
+<app-header></app-header>
+<div>
+    <h1 id='label'>Papers for review</h1>
+</div>
+<div id="review-cards">
+    <app-assigned-review-card *ngFor="let reviewInfo of assignedReviews" [reviewInfo]="reviewInfo"></app-assigned-review-card>
+</div>

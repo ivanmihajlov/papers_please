@@ -15,6 +15,8 @@ export class AddPaperFormComponent implements OnInit {
   paper: string;
   processId: string;
   letter: string;
+  revisionProcessId: string;
+  revisionPaperTitle: string;
   isPaperSubmitted = false;
 
   constructor(private formBuilder: FormBuilder,
@@ -24,6 +26,12 @@ export class AddPaperFormComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
+    const revisionData =  JSON.parse(localStorage.getItem('revisionData'));
+    if (revisionData) {
+      this.revisionPaperTitle = revisionData.paperTitle;
+      this.revisionProcessId = revisionData.processId;
+      localStorage.removeItem('revisionData');
+    }
   }
 
   createForm() {
@@ -40,7 +48,10 @@ export class AddPaperFormComponent implements OnInit {
     }
 
     let postReq: any;
-    postReq = this.paperService.addScientificPaper(this.paper);
+    if (this.revisionPaperTitle)
+      postReq = this.paperService.addPaperRevision(this.paper, this.revisionProcessId);
+    else
+      postReq = this.paperService.addScientificPaper(this.paper);
 
     postReq.subscribe(
       (response => {
@@ -109,7 +120,7 @@ export class AddPaperFormComponent implements OnInit {
     };
   }
 
-  letterFileChange(files: any, change: any) {
+  letterFileChange(files: any) {
     const reader = new FileReader();
     reader.readAsText(files[0], 'UTF-8');
     reader.onload  = () => {

@@ -48,6 +48,7 @@ public class PublishingProcessRepository {
 			ResourceIterator i = result.getIterator();
 			Resource res = null;
 			List<PublishingProcess> publishingProcesses = new ArrayList<>();
+			
 			while (i.hasMoreResources()) {
 				try {
 					res = i.nextResource();
@@ -94,11 +95,12 @@ public class PublishingProcessRepository {
 
 			ResourceIterator i = result.getIterator();
 			Resource res = null;
+			
 			while (i.hasMoreResources()) {
 				try {
 					res = i.nextResource();
 					PublishingProcess publishingProcess = unmarshallPublishingProcess(res.getContent().toString());
-					return  publishingProcess;
+					return publishingProcess;
 				} finally {
 					try {
 						((EXistResource)res).freeResources();
@@ -107,8 +109,8 @@ public class PublishingProcessRepository {
 					}
 				}
 			}
-			return  null;
-		} catch(Exception e) {
+			return null;
+		} catch (Exception e) {
 			throw new DatabaseException("Finding paper by ID failed!");
 		}
 	}
@@ -141,9 +143,26 @@ public class PublishingProcessRepository {
 		}
 	}
 	
+	public void update(PublishingProcess publishingProcess) {
+		try {
+			String userXML = marshallPublishingProcess(publishingProcess);
+			dbManager.save(publishingProcessCollectionId, publishingProcess.getId(),  userXML);
+		} catch (JAXBException e) {
+			throw new DatabaseException("Error while marshalling publishing process!");
+		} catch (Exception e) {
+			throw new DatabaseException("Error while updating publishing process!");
+		}
+	}
+	
 	public void updateStatus(String processId, String newStatus) throws Exception {
 		String updatePath = "/publishing-process/@status";
 		String xUpdateExpression = String.format(XUpdateTemplate.UPDATE, updatePath, newStatus);
+		dbManager.executeXUpdate(publishingProcessCollectionId, xUpdateExpression, processId);
+	}
+	
+	public void updateLatestVersion(String processId, String newVersion) throws Exception {
+		String updatePath = "/publishing-process/@latestVersion";
+		String xUpdateExpression = String.format(XUpdateTemplate.UPDATE, updatePath, newVersion);
 		dbManager.executeXUpdate(publishingProcessCollectionId, xUpdateExpression, processId);
 	}
 	
@@ -151,7 +170,7 @@ public class PublishingProcessRepository {
 		try {
 			XMLResource result = dbManager.findOne(publishingProcessCollectionId, processId);
 			if (result == null)
-				throw new ResourceNotFoundException("Couldn't fint thep ublishing process with id " + processId);
+				throw new ResourceNotFoundException("Couldn't find the publishing process with ID " + processId);
 
 			String updatePath = "/publishing-process/editor-id";
 			String xUpdateExpression = String.format(XUpdateTemplate.UPDATE, updatePath, userId);
@@ -177,6 +196,15 @@ public class PublishingProcessRepository {
 		ResourceSet rs = dbManager.executeXQuery(publishingProcessCollectionId, query, params, "");
 		String status = rs.getIterator().nextResource().getContent().toString();
 		return status;
+	}
+	
+	public String getProcessLatestVersion(String processId) throws Exception {
+		String xQueryPath = "./src/main/resources/xQuery/getProcessLatestVersion.txt";
+		HashMap<String, String> params = new HashMap<>();
+		params.put("id", processId);
+		ResourceSet rs = dbManager.executeXQuery(publishingProcessCollectionId, "", params, xQueryPath);
+		String latestVersion = rs.getIterator().nextResource().getContent().toString();
+		return latestVersion;
 	}
 	
 	public String getCoverLetterByPaperId(String paperId) throws Exception{

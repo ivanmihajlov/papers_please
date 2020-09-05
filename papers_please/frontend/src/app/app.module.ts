@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AllowedRoutes } from './_service/allowed-routes.service';
 import { AuthenticationService } from './_service/authentication.service';
 import { PaperService } from './_service/paper.service';
+import { CoverLetterService } from './_service/cover-letter.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MaterialModule } from './material/material.module';
@@ -22,6 +23,13 @@ import { AuthorPapersComponent } from './author-papers/author-papers.component';
 import { QuotedPapersComponent } from './quoted-papers/quoted-papers.component';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { EditorPageComponent } from './editor-page/editor-page.component';
+import { PublishingProcessCardComponent } from './publishing-process-card/publishing-process-card.component';
+import { AssignReviewerDialogComponent } from './assign-reviewer-dialog/assign-reviewer-dialog.component';
+import { ReviewsComponent } from './reviews/reviews.component';
+import { ReviewRequestsComponent } from './review-requests/review-requests.component';
+import { ReviewRequestCardComponent } from './review-request-card/review-request-card.component';
+import { AssignedReviewCardComponent } from './assigned-review-card/assigned-review-card.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +44,14 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     AuthorPapersComponent,
     QuotedPapersComponent,
     SearchFormComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    EditorPageComponent,
+    PublishingProcessCardComponent,
+    AssignReviewerDialogComponent,
+    ReviewsComponent,
+    ReviewRequestsComponent,
+    ReviewRequestCardComponent,
+    AssignedReviewCardComponent
   ],
   imports: [
     BrowserModule,
@@ -59,13 +74,14 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     AuthenticationService,
     PaperService,
     AuthorPapersComponent,
+    CoverLetterService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
     }
   ],
-  entryComponents: [ConfirmationDialogComponent],
+  entryComponents: [ConfirmationDialogComponent, AssignReviewerDialogComponent],
   bootstrap: [AppComponent]
 })
 

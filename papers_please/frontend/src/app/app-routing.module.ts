@@ -7,6 +7,9 @@ import { HomeComponent } from './home/home.component';
 import { AddPaperFormComponent } from './add-paper-form/add-paper-form.component';
 import { AuthorPapersComponent } from './author-papers/author-papers.component';
 import { QuotedPapersComponent } from './quoted-papers/quoted-papers.component';
+import { EditorPageComponent } from './editor-page/editor-page.component';
+import { ReviewRequestsComponent } from './review-requests/review-requests.component';
+import { ReviewsComponent } from './reviews/reviews.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -15,7 +18,10 @@ const routes: Routes = [
   { path: 'logout', component: LogoutComponent},
   { path: 'add-paper', component: AddPaperFormComponent},
   { path: 'my-papers', component: AuthorPapersComponent},
-  { path: 'paper-quoted-by/:id', component: QuotedPapersComponent}
+  { path: 'paper-quoted-by/:id', component: QuotedPapersComponent},
+  { path: 'submissions-in-process', component: EditorPageComponent},
+  { path: 'review-requests', component: ReviewRequestsComponent},
+  { path: 'assigned-reviews', component: ReviewsComponent }
 ];
 
 @NgModule({

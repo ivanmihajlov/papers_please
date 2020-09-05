@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
         <span><button mat-button (click)="goToHome()"><h4>Papers, please! </h4></button></span>
-        <div>
+        <div *ngIf="router.url === '/' || router.url === '/my-papers'">
             <form id="general-search-form" noval [formGroup]="generalSearchForm">
                 &nbsp;
                 <i id="search-icon-btn" class="fa fa-search" aria-hidden="true" (click)="generalSearch()"></i>

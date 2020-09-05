@@ -26,7 +26,7 @@ export class AllowedRoutes {
 
       decodedToken.roles.forEach(role => {
         if (role.authority === 'ROLE_EDITOR') {
-          // TODO
+          components.push({path: '/submissions-in-process', label: 'Submissions in process'});
         }
 
         if (role.authority === 'ROLE_AUTHOR') {
@@ -35,7 +35,8 @@ export class AllowedRoutes {
         }
 
         if (role.authority === 'ROLE_REVIEWER') {
-          // TODO
+          components.push({path: '/review-requests', label: 'Review requests'});
+          components.push({path: '/assigned-reviews', label: 'Assigned reviews'});
         }
       });
 

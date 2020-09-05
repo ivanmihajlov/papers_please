@@ -1,0 +1,69 @@
+<div class="main-div" >
+    <mat-card class="publishing-process-card">
+        <mat-card-header>
+            <mat-card-title> {{ publishingProcess.paperTitles[0] }} </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <table>
+                <tr>
+                    <td>
+                        <b>Editor:</b> {{publishingProcess.editorName}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Authors:</b> <span *ngFor="let author of publishingProcess.authors"> {{ author }} </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Reviewers:</b> <span *ngFor="let reviewer of publishingProcess.reviewers"> {{ reviewer }} </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Status:</b> {{ publishingProcess.status }}
+                    </td>
+                </tr>
+                <tr>
+                     <td>
+                        <b>Version:</b> {{ publishingProcess.version }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br>
+                        <button mat-raised-button color="primary" [matMenuTriggerFor]="viewMenu1">View paper</button>
+                        <mat-menu #viewMenu1="matMenu" yPosition="below">
+                            <button mat-menu-item (click)="viewHtmlPaper()"><b>HTML</b></button>
+                            <button mat-menu-item (click)="viewPdfPaper()"><b>PDF</b></button>
+                            <button mat-menu-item (click)="viewXmlPaper()"><b>XML</b></button>
+                        </mat-menu>
+                        <button mat-raised-button color="primary" [matMenuTriggerFor]="viewMenu2">View cover letter</button>
+                        <mat-menu #viewMenu2="matMenu" yPosition="below">
+                            <button mat-menu-item (click)="viewHtmlLetter()"><b>HTML</b></button>
+                            <button mat-menu-item (click)="viewPdfLetter()"><b>PDF</b></button>
+                            <button mat-menu-item (click)="viewXmlLetter()"><b>XML</b></button>
+                        </mat-menu>
+                        <button mat-raised-button color="primary" *ngIf="showReviews" [matMenuTriggerFor]="viewMenu3">View reviews</button>
+                        <mat-menu #viewMenu3="matMenu" yPosition="below">
+                            <button mat-menu-item (click)="viewHtmlReviews()"><b>HTML</b></button>
+                            <button mat-menu-item (click)="viewPdfReviews()"><b>PDF</b></button>
+                            <button mat-menu-item (click)="viewXmlReviews()"><b>XML</b></button>
+                        </mat-menu>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br>
+                        <button mat-button color="accent" *ngIf="showAssignEditor" (click)="assignMyselfAsEditor()">Assign myself as editor</button>
+                        <button mat-button color="accent" *ngIf="showAssignReviewer" (click)="openDialog()">Assign reviewer</button>
+                        <button mat-stroked-button color="accent" *ngIf="showDecisionButtons" (click)="accept()">Accept</button>
+                        <button mat-stroked-button color="basic" *ngIf="showDecisionButtons" (click)="revise()">Revise</button>
+                        <button mat-stroked-button color="warn" *ngIf="showDecisionButtons"(click)="reject()">Reject</button>
+                    </td>
+                </tr>
+            </table>
+        </mat-card-content>
+    </mat-card>
+</div>

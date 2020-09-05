@@ -14,6 +14,7 @@
            				<h1>
            					<xsl:for-each select="ns:scientific_paper/ns:head/ns:title">       			
 	       						<xsl:value-of select="."/>
+               						
 	     						<div></div>	
      						</xsl:for-each>
            				</h1>

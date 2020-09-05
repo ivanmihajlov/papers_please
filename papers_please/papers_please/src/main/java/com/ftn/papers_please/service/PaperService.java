@@ -19,13 +19,14 @@ import org.xmldb.api.modules.XMLResource;
 import com.ftn.papers_please.repository.PaperRepository;
 import com.ftn.papers_please.util.DOMParser;
 import com.ftn.papers_please.util.XSLFOTransformer;
+import com.ftn.papers_please.repository.PublishingProcessRepository;
+import com.ftn.papers_please.dto.SearchData;
+import com.ftn.papers_please.exceptions.MaxChapterLevelsExceededException;
 import com.ftn.papers_please.exceptions.ProcessStatusException;
 import com.ftn.papers_please.exceptions.RevisionForbiddenException;
-import com.ftn.papers_please.dto.SearchData;
 import com.ftn.papers_please.fuseki.FusekiReader;
 import com.ftn.papers_please.fuseki.FusekiManager;
 import com.ftn.papers_please.fuseki.MetadataExtractor;
-import com.ftn.papers_please.exceptions.MaxChapterLevelsExceededException;
 import com.ftn.papers_please.model.scientific_paper.ScientificPaper;
 
 @Service
@@ -36,13 +37,16 @@ public class PaperService {
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 	@Value("${paper-schema-path}")
-	private String spSchemaPath;
+	private String paperSchemaPath;
 	
 	@Value("${max-chapter-levels}")
 	private int maxChapterLevels;
 	
 	@Autowired
 	private PaperRepository paperRepository;
+	
+	@Autowired
+	private PublishingProcessRepository publishingProcessRepository;
 
 	@Autowired
 	private PublishingProcessService publishingProcessService;
@@ -82,6 +86,20 @@ public class PaperService {
     	ByteArrayOutputStream paperHtml = xslfoTransformer.generateHTML(xmlString, xslString); 
 		return paperHtml.toByteArray();
 	}
+    
+    public byte[] anonymousFindOneHtml(String id) throws Exception {
+    	String xmlString = paperRepository.findOne(id).getContent().toString();
+    	String xslString = PaperRepository.ANONYMOUS_PAPER_XSL_PATH;
+    	ByteArrayOutputStream scientificPaperHtml = xslfoTransformer.generateHTML(xmlString, xslString); 
+		return scientificPaperHtml.toByteArray();
+	}
+    
+    public byte[] anonymousFindOnePdf(String id) throws Exception {
+		String xmlString = paperRepository.findOne(id).getContent().toString();
+		String xslString = PaperRepository.ANONYMOUS_PAPER_XSL_FO_PATH;
+		ByteArrayOutputStream scientificPaperPdf = xslfoTransformer.generatePDF(xmlString, xslString); 
+		return scientificPaperPdf.toByteArray();
+    }
 	
 	public String getAll(String searchText, String loggedAuthor) {
 		return paperRepository.getAll(searchText, loggedAuthor);
@@ -145,7 +163,7 @@ public class PaperService {
 	
 	public String save(String scientificPaperXml, String paperVersion) throws Exception {
 		// validate paper XML using the paper schema
-		Document document = DOMParser.buildDocument(scientificPaperXml, spSchemaPath);
+		Document document = DOMParser.buildDocument(scientificPaperXml, paperSchemaPath);
 		String id = paperRepository.getNextId();
 		generateIds(document, id);
 
@@ -166,6 +184,24 @@ public class PaperService {
 		metadataExtractor.extractMetadata(newXml, rdfFilePath);
 		fusekiManager.saveMetadata(rdfFilePath, "/scientificPapers");
 		return id;
+	}
+	
+	public void addPaperRevision(String processId, String scientificPaperXml, String authorUsername) throws Exception {
+		String authorFromProcess = publishingProcessRepository.getAuthorFromProcess(processId);
+		if (!authorFromProcess.equals(authorUsername))
+			throw new RevisionForbiddenException("You are not the author of this paper!");
+
+		String processStatus = publishingProcessRepository.getProcessStatus(processId);
+		if (!processStatus.equals("NEW_REVISION"))
+			throw new RevisionForbiddenException("Cannot upload revision at this time!");
+
+		Integer latestVersion = Integer.valueOf(publishingProcessRepository.getProcessLatestVersion(processId));
+		String newVersion = Integer.toString(latestVersion + 1);
+
+		String paperVersionId = save(scientificPaperXml, newVersion);
+		publishingProcessService.addNewPaperVersion(processId, paperVersionId);
+		publishingProcessRepository.updateLatestVersion(processId, newVersion);
+		publishingProcessRepository.updateStatus(processId, "NEW_SUBMISSION");
 	}
 	
 	public void withdrawScientificPaper(String paperId, String authorUsername) throws Exception {

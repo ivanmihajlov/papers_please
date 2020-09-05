@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.modules.XMLResource;
 
-import com.ftn.papers_please.exceptions.ResourceNotFoundException;
 import com.ftn.papers_please.exceptions.DatabaseException;
+import com.ftn.papers_please.exceptions.ResourceNotFoundException;
 import com.ftn.papers_please.util.DBManager;
 
 @Repository

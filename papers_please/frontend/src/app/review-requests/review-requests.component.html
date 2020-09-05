@@ -1,0 +1,7 @@
+<app-header></app-header>
+<div>
+    <h1 id='label'>Review requests</h1>
+</div>
+<div id="request-cards">
+    <app-review-request-card *ngFor="let reviewRequest of reviewRequests" [reviewRequest]="reviewRequest"></app-review-request-card>
+</div>

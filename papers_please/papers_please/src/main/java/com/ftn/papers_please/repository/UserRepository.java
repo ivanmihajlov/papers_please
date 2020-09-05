@@ -34,7 +34,6 @@ public class UserRepository {
 	private String userCollectionId;
 
 	public TUser findByUsername(String username) {
-		
 		try {
 			String xPathExpression = String.format("//user[username='%s']", username);
 			ResourceSet result = dbManager.executeXPath(userCollectionId, xPathExpression);
@@ -64,7 +63,6 @@ public class UserRepository {
 	}
 
 	public TUser findById(String userId) {
-		
 		try {
 			String xPathExpression = String.format("//user[@user_id='%s']", userId);
 			ResourceSet result = dbManager.executeXPath(userCollectionId, xPathExpression);
@@ -94,7 +92,6 @@ public class UserRepository {
 	}
 
 	public List<TUser> findAll() {
-		
 		try {
 			String xPathExpression = "/user";
 			ResourceSet result = dbManager.executeXPath(userCollectionId, xPathExpression);

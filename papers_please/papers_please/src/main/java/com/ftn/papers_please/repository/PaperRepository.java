@@ -24,10 +24,10 @@ import org.xmldb.api.modules.XMLResource;
 import com.ftn.papers_please.util.DBManager;
 import com.ftn.papers_please.util.XUpdateTemplate;
 import com.ftn.papers_please.util.FileUtil;
-import com.ftn.papers_please.fuseki.MetadataExtractor;
 import com.ftn.papers_please.exceptions.DatabaseException;
-import com.ftn.papers_please.model.scientific_paper.ScientificPaper;
 import com.ftn.papers_please.exceptions.ResourceNotFoundException;
+import com.ftn.papers_please.fuseki.MetadataExtractor;
+import com.ftn.papers_please.model.scientific_paper.ScientificPaper;
 
 @Repository
 public class PaperRepository {
@@ -35,6 +35,8 @@ public class PaperRepository {
 	private static final String XQUERY_PATH = "src/main/resources/xQuery";
 	public static final String PAPER_XSL_FO_PATH = "src/main/resources/xsl-fo/paper_fo.xsl";
 	public static final String PAPER_XSL_PATH = "src/main/resources/xslt/paper.xsl";
+	public static final String ANONYMOUS_PAPER_XSL_FO_PATH = "src/main/resources/xsl-fo/anonymous_paper_fo.xsl";
+	public static final String ANONYMOUS_PAPER_XSL_PATH = "src/main/resources/xslt/anonymous_paper.xsl";
 
 	@Autowired
 	private DBManager dbManager;
@@ -44,6 +46,9 @@ public class PaperRepository {
 	
 	@Value("${paper-collection-id}")
 	private String paperCollectionId;
+	
+	@Value("${paper-schema-path}")
+	private String paperSchemaPath;
 	
 	public XMLResource findOne(String id) throws Exception {
 		XMLResource result = dbManager.findOne(paperCollectionId, id);
@@ -77,6 +82,7 @@ public class PaperRepository {
 			}
 			return paper;
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new DatabaseException("Finding paper by ID failed!");
 		}
 	}
@@ -163,8 +169,7 @@ public class PaperRepository {
 	public void update(ScientificPaper scientificPaper) {
 		try {
 			String spXML = marshallPaper(scientificPaper);
-			dbManager.save(paperCollectionId, scientificPaper.getId(),  spXML);
-
+			dbManager.save(paperCollectionId, scientificPaper.getId(), spXML);
 		} catch (JAXBException e) {
 			throw new DatabaseException("Error while marshalling scientific paper!");
 		} catch (Exception e) {
@@ -183,7 +188,6 @@ public class PaperRepository {
 		Marshaller marshaller = context.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		
 		marshaller.marshal(scientificPaper, stream);
 		return new String(stream.toByteArray());
 	}

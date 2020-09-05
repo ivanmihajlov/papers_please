@@ -4,7 +4,8 @@
 </div>
 <form id="add-paper-form" [formGroup]="form">
     <mat-card id="add-paper-card">
-        <h3>Submit a new paper</h3>
+        <h3 *ngIf="!revisionPaperTitle">Submit a new paper</h3>
+        <h3 *ngIf="revisionPaperTitle">Add new revision of "{{revisionPaperTitle}}"</h3>
         <br />
         <div>
             <input hidden formControlName="scientificPaper" id="scientificPaper" type="file" name="file"

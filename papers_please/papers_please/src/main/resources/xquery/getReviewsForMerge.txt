@@ -1,0 +1,10 @@
+declare namespace ns="https://github.com/ivanmihajlov/papers_please";
+let $processes := collection("/db/sample/publishing_process")
+let $reviews := collection("/db/sample/evaluation_forms")
+
+return <ns:evaluation-forms xmlns:sp="https://github.com/ivanmihajlov/papers_please">
+{for $review in $reviews
+ for $process in $processes
+ where $process/sp:publishing-process/@id = $id
+ return $review}
+</ns:evaluation-forms>

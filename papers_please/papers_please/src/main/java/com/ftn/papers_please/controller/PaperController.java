@@ -108,6 +108,14 @@ public class PaperController {
 	}
 	
 	@PreAuthorize("hasRole('ROLE_AUTHOR')")
+	@PostMapping(value = "/revision", consumes = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<String> addPaperRevision(@RequestParam(("processId")) String processId, @RequestBody String scientificPaperXml) throws Exception {
+		String username = tokenUtils.getUsernameFromRequest(request);
+		paperService.addPaperRevision(processId, scientificPaperXml, username);
+		return new ResponseEntity<>(processId, HttpStatus.CREATED);
+	}
+	
+	@PreAuthorize("hasRole('ROLE_AUTHOR')")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<String> withdrawScientificPaper(@PathVariable("id") String paperId) throws Exception {
 		String username = tokenUtils.getUsernameFromRequest(request);

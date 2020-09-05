@@ -30,6 +30,10 @@ export class PaperService {
     return this.http.post(URL, paperXml, this.httpOptions);
   }
 
+  addPaperRevision(paperXml: string, processId: string) {
+    return this.http.post(URL + '/revision?processId=' + processId, paperXml, this.httpOptions);
+  }
+
   getQuotedBy(paperId: string): Observable<string> {
     return this.http.get(URL + '/' + paperId + '/quotes', { responseType: 'text' });
   }
@@ -46,14 +50,14 @@ export class PaperService {
     window.open(URL + '/html/' + paperId, '_blank');
   }
 
-  getLetterPdf(paperId: string) {
-    window.open(URL + '/' + paperId + '/coverLetter/pdf', '_blank');
-  }
-
   getLetterXml(paperId: string) {
     window.open(URL + '/' + paperId + '/coverLetter/xml', '_blank');
   }
 
+  getLetterPdf(paperId: string) {
+    window.open(URL + '/' + paperId + '/coverLetter/pdf', '_blank');
+  }
+  
   getLetterHtml(paperId: string) {
     window.open(URL + '/' + paperId + '/coverLetter/html', '_blank');
   }
