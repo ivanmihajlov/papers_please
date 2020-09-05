@@ -2,8 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ReviewService } from '../_service/review.service';
 import { ReviewRequest } from '../_model/reviewRequest.model';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-review-request-card',
@@ -16,8 +14,7 @@ export class ReviewRequestCardComponent implements OnInit {
   reviewRequest: ReviewRequest;
 
   constructor(private reviewService: ReviewService,
-              private toastr: ToastrService,
-              private router: Router) { }
+              private toastr: ToastrService) { }
 
   ngOnInit() {
   }

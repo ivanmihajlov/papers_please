@@ -43,6 +43,12 @@ export class ReviewService {
     });
   }
 
+  getMergedHtml(reviewIds: string[]) {
+    reviewIds.forEach(id => {
+      window.open(URL + '/merged/' + id, '_blank');
+    });
+  }
+
   getReviewRequests(): Observable<any> {
     return this.http.get('http://localhost:8088/api/reviewers/reviewRequests');
   }

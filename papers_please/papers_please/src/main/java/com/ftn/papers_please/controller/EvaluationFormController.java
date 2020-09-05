@@ -67,6 +67,12 @@ public class EvaluationFormController {
 		return new ResponseEntity<>(new String(resource), HttpStatus.OK); 
 	}
 	
+	@GetMapping(value = "/merged/{id}", produces = MediaType.TEXT_HTML_VALUE)
+	public ResponseEntity<String> getMergedHtml(@PathVariable("id") String id)throws Exception { 
+		byte[] resource = evaluationFormService.findOneHtml(id);
+		return new ResponseEntity<>(new String(resource), HttpStatus.OK); 
+	}
+	
 	@GetMapping(value = "/pdf/{id}", produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<byte[]> findOnePdf(@PathVariable("id") String id) throws Exception {
 		byte[] contents = evaluationFormService.findOnePdf(id);

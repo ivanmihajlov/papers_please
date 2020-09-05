@@ -167,6 +167,10 @@ export class PublishingProcessCardComponent implements OnInit {
     this.reviewService.getHtml(this.publishingProcess.finishedReviewsIds);
   }
 
+  viewMergedReviews() {
+    this.reviewService.getMergedHtml(this.publishingProcess.finishedReviewsIds);
+  }
+
   viewPdfReviews() {
     this.reviewService.getPdf(this.publishingProcess.finishedReviewsIds);
   }

@@ -47,7 +47,7 @@
                         </mat-menu>
                         <button mat-raised-button color="primary" *ngIf="showReviews" [matMenuTriggerFor]="viewMenu3">View reviews</button>
                         <mat-menu #viewMenu3="matMenu" yPosition="below">
-                            <button mat-menu-item (click)="viewHtmlReviews()"><b>HTML</b></button>
+                            <button mat-menu-item (click)="viewMergedReviews()"><b>HTML</b></button>
                             <button mat-menu-item (click)="viewPdfReviews()"><b>PDF</b></button>
                             <button mat-menu-item (click)="viewXmlReviews()"><b>XML</b></button>
                         </mat-menu>

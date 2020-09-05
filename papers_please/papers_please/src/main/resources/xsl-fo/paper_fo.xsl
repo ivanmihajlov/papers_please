@@ -15,7 +15,7 @@
 				 <fo:block>
                    <xsl:if test="ns:scientific_paper/ns:head">
                         <fo:block text-align-last="center">
-                           <fo:block font-family="sans-serif" font-size="36px" font-weight="bold" position="absolute" padding="10px">
+                           <fo:block font-family="sans-serif" font-size="28px" font-weight="bold" position="absolute" padding="10px">
  								<xsl:for-each select="ns:scientific_paper/ns:head/ns:title">       			
                						<xsl:value-of select="."/>
                						<fo:block></fo:block>
