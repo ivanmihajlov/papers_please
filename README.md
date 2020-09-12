@@ -40,17 +40,19 @@ Demonstration video: https://youtu.be/fpGVptp4XT0
 
 * Download [Node.js LTS](https://nodejs.org/en/download/) and install it
 * Open the command prompt in *papers_please\frontend* folder and execute `npm install`
-* Once the installation finishes, execute `npm install -g @angular/cli`
-* Start the app by executing `ng serve --open`
+* Once the installation finishes, execute `npm start`
+  * To run with Angular, first execute `npm install -g @angular/cli`
+  * Start the app by executing `ng serve --open`
 * Verify the app is running by opening [localhost:4200](http://localhost:4200/)
 
 ## Setup
 
 * On Apache Jena Fuseki [manage datasets page](http://localhost:3030/manage.html) create a new **Papers** dataset with the type **Persistent (TDB2)**
-* After starting the application, register a new user.
+* After starting the application, register a new user
 * To give user the editor role:
   * Open [eXide](http://localhost:8080/exist/apps/eXide/) and select *directory* tab in the left panel
   * Default credentials are **Username:** *admin* **Password**: *[blank]*
   * Go to *db/sample/users* collection and find the desired user, e.g. *user0*
   * Add `<role role="ROLE_EDITOR"/>` to `<roles>` element and click *Save* above
 * Examples of valid XML documents can be found in *papers_please\papers_please\src\main\resources\examples*
+* At least two reviews are needed in order to allow the editor to accept/reject a paper
