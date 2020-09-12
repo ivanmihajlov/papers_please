@@ -45,10 +45,6 @@
         <abstract id="ID003">
             <paragraph id="ID005">
                 paragraph1
-                <quote id="ID011">
-                    <source>paper0</source>
-                    <text>Quoted text</text>
-                </quote>
             </paragraph>
             <paragraph id="ID019">
                 paragraph2

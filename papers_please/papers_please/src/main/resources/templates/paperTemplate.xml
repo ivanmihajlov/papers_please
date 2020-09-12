@@ -43,24 +43,6 @@
     <body>
         <abstract id="ID003">
             <paragraph id="ID005">
-                <b>
-                    <i>
-                    </i>
-                    <i>
-                    </i>
-                </b>
-                <i>
-                    <i>
-                    </i>
-                    <b>
-                    </b>
-                </i>
-                <u>
-                    <b>
-                    </b>
-                    <b>
-                    </b>
-                </u>
                 <unordered_list id="ID007" style="circle">
                     <item>item0</item>
                     <item>item1</item>
@@ -69,28 +51,6 @@
                     <item>item2</item>
                     <item>item3</item>
                 </ordered_list>
-                <quote id="ID011">
-                    <source>paper0</source>
-                    <text>Quoted text</text>
-                </quote>
-                <b>
-                    <i>
-                    </i>
-                    <b>
-                    </b>
-                </b>
-                <i>
-                    <b>
-                    </b>
-                    <b>
-                    </b>
-                </i>
-                <u>
-                    <i>
-                    </i>
-                    <i>
-                    </i>
-                </u>
                 <unordered_list id="ID013" style="circle">
                     <item>item4</item>
                     <item>item5</item>
@@ -101,24 +61,6 @@
                 </ordered_list>
             </paragraph>
             <paragraph id="ID019">
-                <b>
-                    <b>
-                    </b>
-                    <u>
-                    </u>
-                </b>
-                <i>
-                    <u>
-                    </u>
-                    <u>
-                    </u>
-                </i>
-                <u>
-                    <b>
-                    </b>
-                    <b>
-                    </b>
-                </u>
                 <unordered_list id="ID021" style="circle">
                     <item>item8</item>
                     <item>item9</item>
@@ -127,24 +69,6 @@
                     <item>item10</item>
                     <item>item11</item>
                 </ordered_list>
-                <b>
-                    <i>
-                    </i>
-                    <i>
-                    </i>
-                </b>
-                <i>
-                    <b>
-                    </b>
-                    <u>
-                    </u>
-                </i>
-                <u>
-                    <u>
-                    </u>
-                    <u>
-                    </u>
-                </u>
                 <unordered_list id="ID027" style="circle">
                     <item>item12</item>
                     <item>item13</item>
@@ -170,24 +94,6 @@
                         <th>th1</th>
                     </tr>
                 </table>
-                <b>
-                    <i>
-                    </i>
-                    <u>
-                    </u>
-                </b>
-                <i>
-                    <b>
-                    </b>
-                    <u>
-                    </u>
-                </i>
-                <u>
-                    <b>
-                    </b>
-                    <u>
-                    </u>
-                </u>
                 <unordered_list id="ID039" style="circle">
                     <item>item16</item>
                     <item>item17</item>
@@ -253,24 +159,6 @@
                 </table>
             </paragraph>
             <paragraph id="ID059">
-                <b>
-                    <b>
-                    </b>
-                    <b>
-                    </b>
-                </b>
-                <i>
-                    <b>
-                    </b>
-                    <i>
-                    </i>
-                </i>
-                <u>
-                    <u>
-                    </u>
-                    <b>
-                    </b>
-                </u>
                 <unordered_list id="ID061" style="circle">
                     <item>item20</item>
                     <item>item21</item>
@@ -279,24 +167,6 @@
                     <item>item22</item>
                     <item>item23</item>
                 </ordered_list>
-                <b>
-                    <b>
-                    </b>
-                    <u>
-                    </u>
-                </b>
-                <i>
-                    <u>
-                    </u>
-                    <i>
-                    </i>
-                </i>
-                <u>
-                    <i>
-                    </i>
-                    <u>
-                    </u>
-                </u>
                 <unordered_list id="ID067" style="circle">
                     <item>item24</item>
                     <item>item25</item>
