@@ -9,7 +9,7 @@
             </form>
         </div>
         <span class="fill-remaining-space"></span>
-        <button mat-button (click)="goToHome()"> Home </button>
+        <button mat-button (click)="goToHome()"> Home </button> 
         <button mat-button *ngFor="let link of links" [routerLink]="link.path" routerLinkActive="active">
             {{ link.label }}
         </button>
