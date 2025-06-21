@@ -9,8 +9,8 @@ Demonstration video: https://youtu.be/fpGVptp4XT0
 ## Technologies used
 
 * [Java](https://www.java.com/) - a general-purpose object-oriented, class-based programming language
-* [Spring Boot](https://spring.io/projects/spring-boot) - an open source Java-based framework built on the top of the Spring Framework
-* [eXist-db](http://exist-db.org/exist/apps/homepage/index.html) - an open source software project for NoSQL databases built on XML technology
+* [Spring Boot](https://spring.io/projects/spring-boot) - an open-source Java-based framework built on top of Spring Framework
+* [eXist-db](http://exist-db.org/exist/apps/homepage/index.html) - an open-source software project for NoSQL databases built on XML technology
 * [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) - a SPARQL server used for metadata manipulation & extraction
 * [Angular](https://angular.io/) - TypeScript-based open-source web application framework
 
@@ -54,5 +54,5 @@ Demonstration video: https://youtu.be/fpGVptp4XT0
   * Default credentials are **Username:** *admin* **Password**: *[blank]*
   * Go to *db/sample/users* collection and find the desired user, e.g. *user0*
   * Add `<role role="ROLE_EDITOR"/>` to `<roles>` element and click *Save* above
-* Examples of valid XML documents can be found in *papers_please\papers_please\src\main\resources\examples*
+* Examples of valid XML documents can be found in *papers_please\papers_please\src\main\resources\examples* folder
 * At least two reviews are needed in order to allow the editor to accept/reject a paper
